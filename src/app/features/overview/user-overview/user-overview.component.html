@@ -1,0 +1,62 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1>{{ 'overview.title' | translate }}</h1>
+      <p class="page-subtitle">{{ 'overview.subtitle' | translate }}</p>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <app-loading-spinner />
+  } @else if (projections().length === 0) {
+    <div class="empty-state">
+      <mat-icon>dashboard</mat-icon>
+      <p>{{ 'overview.no_data' | translate }}</p>
+    </div>
+  } @else {
+    <div class="overview-list">
+      @for (projection of projections(); track projection.id) {
+        <mat-card class="overview-card">
+          <mat-card-header>
+            <div class="overview-card__header">
+              <div class="overview-card__title">
+                <div class="overview-card__course-badge">
+                  <mat-icon>menu_book</mat-icon>
+                  <span>{{ projection.courseName }}</span>
+                </div>
+                <h3>{{ projection.name }}</h3>
+              </div>
+              <div class="overview-card__grade" [class]="getFinalGradeClass(projection.finalGrade)">
+                <span class="overview-card__grade-label">
+                  {{ 'overview.final_grade' | translate }}
+                </span>
+                <span class="overview-card__grade-value">
+                  {{ projection.finalGrade | number: '1.1-2' }}
+                </span>
+              </div>
+            </div>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="assessments-grid">
+              @for (a of projection.assessment; track a.id) {
+                <div class="assessment-chip" [class.assessment-chip--graded]="isGraded(a)">
+                  <span class="assessment-chip__id">{{ a.identifier }}</span>
+                  @if (isGraded(a)) {
+                    <span class="assessment-chip__value grade-ok">
+                      {{ a.grade | number: '1.1-2' }}
+                    </span>
+                  } @else {
+                    <span class="assessment-chip__value grade-pending">
+                      ≥ {{ a.requiredGrade | number: '1.1-2' }}
+                    </span>
+                  }
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

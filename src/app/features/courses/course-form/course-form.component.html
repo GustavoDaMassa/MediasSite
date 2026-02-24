@@ -1,0 +1,77 @@
+<div class="form-page">
+  <div class="form-page__breadcrumb">
+    <a routerLink="/courses" class="breadcrumb-link">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'common.back' | translate }}
+    </a>
+  </div>
+
+  @if (loadingData()) {
+    <app-loading-spinner />
+  } @else {
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title>
+          {{ (isEditMode() ? 'courses.edit' : 'courses.new') | translate }}
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'courses.name' | translate }}</mat-label>
+            <input matInput formControlName="name" />
+            @if (form.controls.name.hasError('required')) {
+              <mat-error>{{ 'validation.required' | translate }}</mat-error>
+            } @else if (form.controls.name.hasError('minlength')) {
+              <mat-error>{{ 'validation.min_length' | translate: { min: 2 } }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'courses.formula' | translate }}</mat-label>
+            <input matInput formControlName="averageMethod" />
+            <mat-hint>{{ 'courses.formula_hint' | translate }}</mat-hint>
+            @if (form.controls.averageMethod.hasError('required')) {
+              <mat-error>{{ 'validation.required' | translate }}</mat-error>
+            }
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              [matTooltip]="'courses.formula_help_body' | translate"
+            >
+              <mat-icon>help_outline</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'courses.cutoff' | translate }}</mat-label>
+            <input matInput type="number" formControlName="cutOffGrade" step="0.5" min="0" max="10" />
+            <mat-hint>{{ 'courses.cutoff_default' | translate }}</mat-hint>
+            @if (form.controls.cutOffGrade.hasError('required')) {
+              <mat-error>{{ 'validation.required' | translate }}</mat-error>
+            } @else if (form.controls.cutOffGrade.hasError('min')) {
+              <mat-error>{{ 'validation.min_value' | translate: { min: 0 } }}</mat-error>
+            } @else if (form.controls.cutOffGrade.hasError('max')) {
+              <mat-error>{{ 'validation.max_value' | translate: { max: 10 } }}</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" (click)="router.navigate(['/courses'])">
+              {{ 'common.cancel' | translate }}
+            </button>
+            <button mat-flat-button type="submit" [disabled]="loading()">
+              @if (loading()) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                {{ (isEditMode() ? 'common.save' : 'common.create') | translate }}
+              }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

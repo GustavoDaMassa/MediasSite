@@ -1,0 +1,122 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="page-header__nav">
+      <a routerLink="/courses" class="breadcrumb-link">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'nav.courses' | translate }}
+      </a>
+      <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>
+      <span>{{ 'projections.title' | translate: { course: '' } }}</span>
+    </div>
+    <a mat-flat-button [routerLink]="['/courses', courseId, 'projections', 'new']">
+      <mat-icon>add</mat-icon>
+      {{ 'projections.new' | translate }}
+    </a>
+  </div>
+
+  @if (loading()) {
+    <app-loading-spinner />
+  } @else if (projections().length === 0) {
+    <div class="empty-state">
+      <mat-icon>analytics</mat-icon>
+      <p>{{ 'projections.empty' | translate }}</p>
+      <a mat-flat-button [routerLink]="['/courses', courseId, 'projections', 'new']">
+        {{ 'projections.new' | translate }}
+      </a>
+    </div>
+  } @else {
+    <div class="projections-list">
+      @for (projection of projections(); track projection.id) {
+        <mat-card class="projection-card">
+          <mat-card-header class="projection-card__header">
+            <div class="projection-card__title-row">
+              <div class="projection-card__title">
+                <mat-icon>analytics</mat-icon>
+                <h3>{{ projection.name }}</h3>
+              </div>
+              <div class="projection-card__header-right">
+                <div class="projection-card__grade" [class]="getFinalGradeClass(projection)">
+                  <span class="projection-card__grade-label">{{ 'projections.final_grade' | translate }}</span>
+                  <span class="projection-card__grade-value">
+                    {{ projection.finalGrade | number: '1.1-2' }}
+                  </span>
+                </div>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  [matTooltip]="'common.delete' | translate"
+                  (click)="confirmDelete(projection)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card-header>
+
+          <mat-card-content>
+            <table mat-table [dataSource]="projection.assessment" class="assessments-table">
+              <ng-container matColumnDef="identifier">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'assessments.identifier' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let a">
+                  <a
+                    class="assessment-link"
+                    [routerLink]="['/courses', courseId, 'projections', projection.id, 'assessments', a.id, 'grade']"
+                  >
+                    {{ a.identifier }}
+                    @if (a.maxValue !== 10) {
+                      <span class="assessment-max">[{{ a.maxValue }}]</span>
+                    }
+                  </a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="grade">
+                <th mat-header-cell *matHeaderCellDef>{{ 'assessments.grade' | translate }}</th>
+                <td mat-cell *matCellDef="let a">
+                  @if (isGraded(a)) {
+                    <span [class]="a.grade >= 6 ? 'grade-ok' : 'grade-fail'">
+                      {{ a.grade | number: '1.1-2' }}
+                    </span>
+                  } @else {
+                    <span class="grade-empty">{{ 'assessments.pending' | translate }}</span>
+                  }
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="requiredGrade">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'assessments.required_grade' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let a">
+                  @if (!isGraded(a)) {
+                    <span class="grade-pending">{{ a.requiredGrade | number: '1.1-2' }}</span>
+                  } @else {
+                    <span class="grade-empty">—</span>
+                  }
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let a">
+                  <a
+                    mat-icon-button
+                    [matTooltip]="'assessments.insert_grade' | translate"
+                    [routerLink]="['/courses', courseId, 'projections', projection.id, 'assessments', a.id, 'grade']"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </a>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="assessmentColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: assessmentColumns"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

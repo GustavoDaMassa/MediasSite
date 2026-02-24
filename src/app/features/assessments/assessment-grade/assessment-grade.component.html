@@ -1,0 +1,87 @@
+<div class="form-page">
+  <div class="form-page__breadcrumb">
+    <a [routerLink]="['/courses', courseId, 'projections']" class="breadcrumb-link">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'common.back' | translate }}
+    </a>
+  </div>
+
+  @if (loadingData()) {
+    <app-loading-spinner />
+  } @else if (assessment()) {
+    <mat-card class="form-card">
+      <mat-card-header>
+        <div class="form-card__title-row">
+          <mat-icon class="form-card__icon">edit_note</mat-icon>
+          <div>
+            <mat-card-title>{{ 'assessments.insert_grade' | translate }}</mat-card-title>
+            <p class="form-card__identifier">{{ assessment()!.identifier }}</p>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="assessment-info">
+          @if (assessment()!.grade > 0) {
+            <div class="assessment-info__item">
+              <span class="assessment-info__label">{{ 'assessments.grade' | translate }}</span>
+              <span class="assessment-info__value grade-ok">
+                {{ assessment()!.grade | number: '1.1-2' }}
+              </span>
+            </div>
+          }
+          <div class="assessment-info__item">
+            <span class="assessment-info__label">{{ 'assessments.max_value' | translate }}</span>
+            <span class="assessment-info__value">{{ assessment()!.maxValue }}</span>
+          </div>
+          @if (assessment()!.requiredGrade > 0) {
+            <div class="assessment-info__item">
+              <span class="assessment-info__label">
+                {{ 'assessments.required_grade' | translate }}
+              </span>
+              <span class="assessment-info__value grade-pending">
+                {{ assessment()!.requiredGrade | number: '1.1-2' }}
+              </span>
+            </div>
+          }
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'assessments.grade' | translate }}</mat-label>
+            <input matInput type="number" formControlName="value" step="0.1" min="0" />
+            <mat-hint>
+              {{ 'assessments.grade_hint' | translate: { max: assessment()!.maxValue } }}
+            </mat-hint>
+            @if (form.controls.value.hasError('required')) {
+              <mat-error>{{ 'validation.required' | translate }}</mat-error>
+            } @else if (form.controls.value.hasError('min')) {
+              <mat-error>{{ 'validation.min_value' | translate: { min: 0 } }}</mat-error>
+            } @else if (form.controls.value.hasError('max')) {
+              <mat-error>
+                {{ 'validation.max_value' | translate: { max: assessment()!.maxValue } }}
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button
+              mat-button
+              type="button"
+              (click)="router.navigate(['/courses', courseId, 'projections'])"
+            >
+              {{ 'common.cancel' | translate }}
+            </button>
+            <button mat-flat-button type="submit" [disabled]="loading()">
+              @if (loading()) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                {{ 'common.insert' | translate }}
+              }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

@@ -1,0 +1,78 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1>{{ 'courses.title' | translate }}</h1>
+    </div>
+    <a mat-flat-button routerLink="/courses/new">
+      <mat-icon>add</mat-icon>
+      {{ 'courses.new' | translate }}
+    </a>
+  </div>
+
+  @if (loading()) {
+    <app-loading-spinner />
+  } @else if (courses().length === 0) {
+    <div class="empty-state">
+      <mat-icon>menu_book</mat-icon>
+      <p>{{ 'courses.empty' | translate }}</p>
+      <a mat-flat-button routerLink="/courses/new">
+        {{ 'courses.new' | translate }}
+      </a>
+    </div>
+  } @else {
+    <div class="courses-grid">
+      @for (course of courses(); track course.id) {
+        <mat-card class="course-card">
+          <mat-card-content>
+            <div class="course-card__header">
+              <div class="course-card__icon">
+                <mat-icon>menu_book</mat-icon>
+              </div>
+              <div class="course-card__info">
+                <h3 class="course-card__name">{{ course.name }}</h3>
+                <span class="course-card__cutoff">
+                  <mat-icon class="course-card__cutoff-icon">flag</mat-icon>
+                  {{ 'courses.cutoff' | translate }}: {{ course.cutOffGrade }}
+                </span>
+              </div>
+              <div class="course-card__actions">
+                <a
+                  mat-icon-button
+                  [routerLink]="['/courses', course.id, 'edit']"
+                  [matTooltip]="'common.edit' | translate"
+                  (click)="$event.stopPropagation()"
+                >
+                  <mat-icon>edit</mat-icon>
+                </a>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  [matTooltip]="'common.delete' | translate"
+                  (click)="confirmDelete(course); $event.stopPropagation()"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="course-card__formula">
+              <span class="course-card__formula-label">{{ 'courses.formula' | translate }}</span>
+              <code class="course-card__formula-code" [title]="course.averageMethod">
+                {{ truncate(course.averageMethod) }}
+              </code>
+            </div>
+
+            <a
+              mat-stroked-button
+              class="course-card__projections-btn"
+              [routerLink]="['/courses', course.id, 'projections']"
+            >
+              <mat-icon>analytics</mat-icon>
+              {{ 'courses.projections_link' | translate }}
+            </a>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

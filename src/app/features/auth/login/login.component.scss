@@ -1,0 +1,78 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 56px);
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &__icon {
+    color: var(--color-primary);
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  &__title {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: var(--font-sm);
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-lg);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  &__footer-text {
+    text-align: center;
+    font-size: var(--font-sm);
+    color: var(--color-text-secondary);
+    margin: var(--spacing-md) 0 0;
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-btn {
+  margin-top: var(--spacing-sm);
+  height: 44px;
+  font-size: var(--font-md);
+  font-weight: 600;
+}
