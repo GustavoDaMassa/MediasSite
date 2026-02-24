@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { CurrentUser, LoginRequest, RegisterRequest, Role, UserDTO } from '../../shared/models';
@@ -28,8 +28,8 @@ export class AuthService {
           this.storage.setEmail(request.email);
           return this.http.get<UserDTO>(`${environment.apiUrl}/api/v1/users/${request.email}`);
         }),
-        tap((user) => {
-          const current: CurrentUser = { ...user, token: this.storage.getToken()! };
+        map((user): CurrentUser => ({ ...user, token: this.storage.getToken()! })),
+        tap((current) => {
           this.persistUser(current);
           this.router.navigate(['/courses']);
         }),
