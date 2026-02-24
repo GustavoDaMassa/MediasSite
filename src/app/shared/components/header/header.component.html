@@ -1,0 +1,61 @@
+<mat-toolbar class="header">
+  <a routerLink="/courses" class="header__logo">
+    <mat-icon class="header__logo-icon">school</mat-icon>
+    <span class="header__logo-text">MediasSite</span>
+  </a>
+
+  @if (isAuthenticated()) {
+    <nav class="header__nav">
+      <a mat-button routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+        {{ 'nav.courses' | translate }}
+      </a>
+      <a mat-button routerLink="/overview" routerLinkActive="active">
+        {{ 'nav.overview' | translate }}
+      </a>
+    </nav>
+
+    <button mat-icon-button [matMenuTriggerFor]="mobileNav" class="header__hamburger">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #mobileNav="matMenu">
+      <a mat-menu-item routerLink="/courses">
+        <mat-icon>menu_book</mat-icon>
+        {{ 'nav.courses' | translate }}
+      </a>
+      <a mat-menu-item routerLink="/overview">
+        <mat-icon>dashboard</mat-icon>
+        {{ 'nav.overview' | translate }}
+      </a>
+    </mat-menu>
+  }
+
+  <span class="header__spacer"></span>
+
+  <button
+    mat-icon-button
+    (click)="toggleTheme()"
+    [matTooltip]="themeTooltipKey() | translate"
+  >
+    <mat-icon>{{ themeIcon() }}</mat-icon>
+  </button>
+
+  <button mat-button class="header__lang-btn" (click)="toggleLang()">
+    {{ currentLangLabel() }}
+  </button>
+
+  @if (isAuthenticated()) {
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="header__avatar-btn">
+      <span class="header__initials">{{ userInitials() }}</span>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <div mat-menu-item disabled class="header__user-info">
+        {{ currentUser()?.name }}
+      </div>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        {{ 'auth.logout' | translate }}
+      </button>
+    </mat-menu>
+  }
+</mat-toolbar>
