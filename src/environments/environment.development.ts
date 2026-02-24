@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://apimediasapi.gustavohdev.com.br',
+  apiUrl: '',
   defaultLang: 'pt-BR',
 };
