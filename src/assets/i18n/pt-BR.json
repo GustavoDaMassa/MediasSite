@@ -1,0 +1,102 @@
+{
+  "common": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "back": "Voltar",
+    "create": "Criar",
+    "insert": "Inserir",
+    "loading": "Carregando...",
+    "created": "Criado com sucesso!",
+    "updated": "Atualizado com sucesso!",
+    "deleted": "Excluído com sucesso!",
+    "confirm": "Confirmar",
+    "yes": "Sim",
+    "no": "Não",
+    "empty": "Nenhum item encontrado."
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logout": "Sair",
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome completo",
+    "sign_in": "Entrar na conta",
+    "sign_up": "Criar conta",
+    "no_account": "Não tem uma conta?",
+    "already_account": "Já tem uma conta?",
+    "create_account": "Cadastre-se",
+    "back_to_login": "Voltar para o login"
+  },
+  "nav": {
+    "courses": "Disciplinas",
+    "overview": "Visão Geral"
+  },
+  "courses": {
+    "title": "Minhas Disciplinas",
+    "new": "Nova Disciplina",
+    "edit": "Editar Disciplina",
+    "empty": "Nenhuma disciplina cadastrada. Crie a primeira!",
+    "name": "Nome da disciplina",
+    "formula": "Fórmula de cálculo",
+    "cutoff": "Nota de corte",
+    "cutoff_default": "Padrão: 6.0",
+    "formula_hint": "Ex: (0.4*AV1)+(0.6*AV2) | AV1[15] | @M[6](AT1;AT2;AT3)/3",
+    "formula_help_title": "Como usar a fórmula",
+    "formula_help_body": "Use identificadores como AV1, AT1. Para nota máxima customizada: AV1[15]. Para selecionar as N maiores: @M[N](AV1;AV2;...)/N",
+    "delete_title": "Excluir disciplina",
+    "delete_message": "Tem certeza que deseja excluir a disciplina \"{{name}}\"? Todas as projeções serão removidas.",
+    "projections_link": "Ver projeções"
+  },
+  "projections": {
+    "title": "Projeções de {{course}}",
+    "new": "Nova Projeção",
+    "edit": "Editar projeção",
+    "empty": "Nenhuma projeção cadastrada. Crie um cenário!",
+    "name": "Nome da projeção",
+    "final_grade": "Nota Final",
+    "delete_title": "Excluir projeção",
+    "delete_message": "Tem certeza que deseja excluir a projeção \"{{name}}\"?"
+  },
+  "assessments": {
+    "title": "Avaliações",
+    "identifier": "Avaliação",
+    "grade": "Nota",
+    "required_grade": "Necessária",
+    "max_value": "Máximo",
+    "insert_grade": "Lançar Nota",
+    "current_grade": "Nota atual: {{grade}}",
+    "pending": "--",
+    "grade_hint": "Nota entre 0 e {{max}}"
+  },
+  "overview": {
+    "title": "Visão Geral",
+    "subtitle": "Todas as projeções de todas as disciplinas",
+    "course": "Disciplina",
+    "projection": "Projeção",
+    "assessments": "Avaliações",
+    "final_grade": "Nota Final",
+    "no_data": "Nenhuma projeção cadastrada."
+  },
+  "validation": {
+    "required": "Este campo é obrigatório.",
+    "email": "Informe um e-mail válido.",
+    "min_length": "Mínimo de {{min}} caracteres.",
+    "min_value": "Valor mínimo: {{min}}.",
+    "max_value": "Valor máximo: {{max}}."
+  },
+  "errors": {
+    "session_expired": "Sessão expirada. Faça login novamente.",
+    "not_found": "Recurso não encontrado.",
+    "no_permission": "Você não tem permissão para realizar esta ação.",
+    "server_error": "Erro interno do servidor. Tente novamente.",
+    "connection_error": "Sem conexão com o servidor.",
+    "unexpected": "Ocorreu um erro inesperado."
+  },
+  "theme": {
+    "toggle_dark": "Alternar para tema escuro",
+    "toggle_light": "Alternar para tema claro"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "create": "Create",
+    "insert": "Insert",
+    "loading": "Loading...",
+    "created": "Created successfully!",
+    "updated": "Updated successfully!",
+    "deleted": "Deleted successfully!",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "empty": "No items found."
+  },
+  "auth": {
+    "login": "Sign in",
+    "register": "Register",
+    "logout": "Sign out",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full name",
+    "sign_in": "Sign in to your account",
+    "sign_up": "Create account",
+    "no_account": "Don't have an account?",
+    "already_account": "Already have an account?",
+    "create_account": "Sign up",
+    "back_to_login": "Back to login"
+  },
+  "nav": {
+    "courses": "Courses",
+    "overview": "Overview"
+  },
+  "courses": {
+    "title": "My Courses",
+    "new": "New Course",
+    "edit": "Edit Course",
+    "empty": "No courses found. Create the first one!",
+    "name": "Course name",
+    "formula": "Calculation formula",
+    "cutoff": "Passing grade",
+    "cutoff_default": "Default: 6.0",
+    "formula_hint": "Ex: (0.4*AV1)+(0.6*AV2) | AV1[15] | @M[6](AT1;AT2;AT3)/3",
+    "formula_help_title": "How to use the formula",
+    "formula_help_body": "Use identifiers like AV1, AT1. For custom max grade: AV1[15]. To select N highest: @M[N](AV1;AV2;...)/N",
+    "delete_title": "Delete course",
+    "delete_message": "Are you sure you want to delete the course \"{{name}}\"? All projections will be removed.",
+    "projections_link": "View projections"
+  },
+  "projections": {
+    "title": "Projections for {{course}}",
+    "new": "New Projection",
+    "edit": "Edit projection",
+    "empty": "No projections found. Create a scenario!",
+    "name": "Projection name",
+    "final_grade": "Final Grade",
+    "delete_title": "Delete projection",
+    "delete_message": "Are you sure you want to delete the projection \"{{name}}\"?"
+  },
+  "assessments": {
+    "title": "Assessments",
+    "identifier": "Assessment",
+    "grade": "Grade",
+    "required_grade": "Required",
+    "max_value": "Max",
+    "insert_grade": "Enter Grade",
+    "current_grade": "Current grade: {{grade}}",
+    "pending": "--",
+    "grade_hint": "Grade between 0 and {{max}}"
+  },
+  "overview": {
+    "title": "Overview",
+    "subtitle": "All projections across all courses",
+    "course": "Course",
+    "projection": "Projection",
+    "assessments": "Assessments",
+    "final_grade": "Final Grade",
+    "no_data": "No projections found."
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Please enter a valid email.",
+    "min_length": "Minimum {{min}} characters.",
+    "min_value": "Minimum value: {{min}}.",
+    "max_value": "Maximum value: {{max}}."
+  },
+  "errors": {
+    "session_expired": "Session expired. Please sign in again.",
+    "not_found": "Resource not found.",
+    "no_permission": "You do not have permission to perform this action.",
+    "server_error": "Internal server error. Please try again.",
+    "connection_error": "No connection to server.",
+    "unexpected": "An unexpected error occurred."
+  },
+  "theme": {
+    "toggle_dark": "Switch to dark theme",
+    "toggle_light": "Switch to light theme"
+  }
+}
