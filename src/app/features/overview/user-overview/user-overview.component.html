@@ -16,7 +16,7 @@
   } @else {
     <div class="overview-list">
       @for (projection of projections(); track projection.id) {
-        <mat-card class="overview-card">
+        <mat-card class="overview-card overview-card--link" [routerLink]="['/courses', getCourseId(projection.courseName), 'projections']">
           <mat-card-header>
             <div class="overview-card__header">
               <div class="overview-card__title">
