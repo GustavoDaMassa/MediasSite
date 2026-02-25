@@ -33,6 +33,25 @@ html {
   }
 }
 
+// Sobrescreve tokens do Material M3 para usar a cor da logo
+html[data-theme='light'] {
+  --mat-sys-primary: #0288d1;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #cce8f4;
+  --mat-sys-on-primary-container: #001f2a;
+  --mat-sys-secondary: #0277bd;
+  --mat-sys-on-secondary: #ffffff;
+}
+
+html[data-theme='dark'] {
+  --mat-sys-primary: #32befa;
+  --mat-sys-on-primary: #003545;
+  --mat-sys-primary-container: #004d63;
+  --mat-sys-on-primary-container: #b8eaff;
+  --mat-sys-secondary: #5ccffc;
+  --mat-sys-on-secondary: #003545;
+}
+
 // CSS Custom Properties — design system acadêmico
 html[data-theme='light'] {
   --color-bg: #ffffff;
