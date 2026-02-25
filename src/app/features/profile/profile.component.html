@@ -1,14 +1,19 @@
-<div class="page-container">
-  <div class="page-header">
-    <h1>{{ 'profile.title' | translate }}</h1>
+<div class="form-page">
+  <div class="form-page__breadcrumb">
+    <a routerLink="/courses" class="breadcrumb-link">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'common.back' | translate }}
+    </a>
   </div>
 
-  <div class="profile-content">
-    <mat-card class="profile-card">
-      <mat-card-header>
-        <mat-card-title>{{ 'profile.update_name' | translate }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ 'profile.title' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <section class="profile-section">
+        <h3 class="profile-section__title">{{ 'profile.update_name' | translate }}</h3>
         <form [formGroup]="nameForm" (ngSubmit)="updateName()">
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>{{ 'auth.name' | translate }}</mat-label>
@@ -29,14 +34,12 @@
             </button>
           </div>
         </form>
-      </mat-card-content>
-    </mat-card>
+      </section>
 
-    <mat-card class="profile-card">
-      <mat-card-header>
-        <mat-card-title>{{ 'profile.update_email' | translate }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+      <mat-divider></mat-divider>
+
+      <section class="profile-section">
+        <h3 class="profile-section__title">{{ 'profile.update_email' | translate }}</h3>
         <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>{{ 'auth.email' | translate }}</mat-label>
@@ -57,29 +60,23 @@
             </button>
           </div>
         </form>
-      </mat-card-content>
-    </mat-card>
+      </section>
 
-    <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
-    <mat-card class="profile-card profile-card--danger">
-      <mat-card-header>
-        <mat-card-title>{{ 'profile.delete_account' | translate }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+      <section class="profile-section profile-section--danger">
+        <h3 class="profile-section__title">{{ 'profile.delete_account' | translate }}</h3>
         <div class="form-actions">
           <button mat-flat-button color="warn" [disabled]="loadingDelete()" (click)="confirmDelete()">
             @if (loadingDelete()) {
               <mat-spinner diameter="20"></mat-spinner>
             } @else {
-              <ng-container>
-                <mat-icon>delete_forever</mat-icon>
-                {{ 'profile.delete_account' | translate }}
-              </ng-container>
+              <mat-icon>delete_forever</mat-icon>
+              {{ 'profile.delete_account' | translate }}
             }
           </button>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
 </div>

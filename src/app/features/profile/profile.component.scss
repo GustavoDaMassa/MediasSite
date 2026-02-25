@@ -1,13 +1,68 @@
-.profile-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 600px;
+.form-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+
+  &__breadcrumb {
+    margin-bottom: var(--spacing-lg);
+  }
 }
 
-.profile-card {
-  &--danger {
-    border: 1px solid var(--mat-sys-error, #b00020);
+.breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-sm);
+  transition: var(--transition-fast);
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.form-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  mat-card-header {
+    padding: var(--spacing-lg) var(--spacing-lg) 0;
+
+    mat-card-title {
+      font-size: var(--font-xl);
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+  }
+
+  mat-card-content {
+    padding: var(--spacing-lg) !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.profile-section {
+  padding: var(--spacing-md) 0;
+
+  &__title {
+    font-size: var(--font-base);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  &--danger &__title {
+    color: var(--color-error);
   }
 }
 
@@ -18,5 +73,6 @@
 .form-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 0.5rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
 }
