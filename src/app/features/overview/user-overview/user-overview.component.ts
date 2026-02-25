@@ -35,6 +35,7 @@ export class UserOverviewComponent implements OnInit {
 
   readonly projections = signal<ProjectionDTO[]>([]);
   readonly courseIdMap = signal<Map<string, number>>(new Map());
+  readonly cutOffMap = signal<Map<string, number>>(new Map());
   readonly loading = signal(true);
 
   ngOnInit(): void {
@@ -46,8 +47,8 @@ export class UserOverviewComponent implements OnInit {
       courses: this.coursesService.list(user.id),
     }).subscribe({
       next: ({ projections, courses }) => {
-        const map = new Map(courses.map((c) => [c.name, c.id]));
-        this.courseIdMap.set(map);
+        this.courseIdMap.set(new Map(courses.map((c) => [c.name, c.id])));
+        this.cutOffMap.set(new Map(courses.map((c) => [c.name, c.cutOffGrade])));
         this.projections.set(
           [...projections].sort((a, b) => {
             const aAuto = a.name === a.courseName ? 0 : 1;
@@ -70,8 +71,9 @@ export class UserOverviewComponent implements OnInit {
     return a.requiredGrade === 0;
   }
 
-  getFinalGradeClass(grade: number): string {
+  getFinalGradeClass(grade: number, courseName: string | undefined): string {
     if (grade === 0) return '';
-    return grade >= 6 ? 'grade-ok' : 'grade-fail';
+    const cutOff = this.cutOffMap().get(courseName ?? '') ?? 6;
+    return grade >= cutOff ? 'grade-ok' : 'grade-fail';
   }
 }
