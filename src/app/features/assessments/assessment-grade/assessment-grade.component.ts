@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -45,6 +45,7 @@ export class AssessmentGradeComponent implements OnInit {
   readonly loading = signal(false);
   readonly loadingData = signal(true);
   readonly assessment = signal<AssessmentDTO | null>(null);
+  readonly effectiveMax = computed(() => this.assessment()?.maxValue || 10);
 
   courseId = 0;
   projectionId = 0;
@@ -67,7 +68,7 @@ export class AssessmentGradeComponent implements OnInit {
           this.form.controls.value.setValidators([
             Validators.required,
             Validators.min(0),
-            Validators.max(found.maxValue),
+            Validators.max(found.maxValue || 10),
           ]);
           this.form.patchValue({ value: found.grade });
         }
