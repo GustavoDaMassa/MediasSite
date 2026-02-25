@@ -72,9 +72,6 @@
                     [routerLink]="['/courses', courseId, 'projections', projection.id, 'assessments', a.id, 'grade']"
                   >
                     {{ a.identifier }}
-                    @if (a.maxValue !== 10) {
-                      <span class="assessment-max">[{{ a.maxValue }}]</span>
-                    }
                   </a>
                 </td>
               </ng-container>
