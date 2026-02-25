@@ -43,6 +43,13 @@
                 </div>
                 <button
                   mat-icon-button
+                  [matTooltip]="'common.edit' | translate"
+                  (click)="navigateToEdit(projection)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
                   color="warn"
                   [matTooltip]="'common.delete' | translate"
                   (click)="confirmDelete(projection)"

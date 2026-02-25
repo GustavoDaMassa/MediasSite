@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,6 +39,7 @@ import { AssessmentDTO, ProjectionDTO } from '../../../shared/models';
 })
 export class ProjectionListComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly projectionsService = inject(ProjectionsService);
   private readonly notification = inject(NotificationService);
   private readonly translate = inject(TranslateService);
@@ -73,6 +74,10 @@ export class ProjectionListComponent implements OnInit {
   getFinalGradeClass(projection: ProjectionDTO): string {
     if (projection.finalGrade === 0) return '';
     return projection.finalGrade >= 6 ? 'grade-ok' : 'grade-fail';
+  }
+
+  navigateToEdit(projection: ProjectionDTO): void {
+    this.router.navigate(['/courses', this.courseId, 'projections', projection.id, 'edit']);
   }
 
   confirmDelete(projection: ProjectionDTO): void {

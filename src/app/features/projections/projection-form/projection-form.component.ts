@@ -38,7 +38,9 @@ export class ProjectionFormComponent implements OnInit {
   private readonly translate = inject(TranslateService);
 
   readonly loading = signal(false);
+  readonly isEditMode = signal(false);
   courseId = 0;
+  projectionId = 0;
 
   readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -46,6 +48,26 @@ export class ProjectionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.params['courseId']);
+    const projId = this.route.snapshot.params['projectionId'];
+    if (projId) {
+      this.projectionId = Number(projId);
+      this.isEditMode.set(true);
+      this.loadProjection();
+    }
+  }
+
+  private loadProjection(): void {
+    this.loading.set(true);
+    this.projectionsService.list(this.courseId).subscribe({
+      next: (projections) => {
+        const projection = projections.find((p) => p.id === this.projectionId);
+        if (projection) {
+          this.form.patchValue({ name: projection.name });
+        }
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false),
+    });
   }
 
   onSubmit(): void {
@@ -53,12 +75,22 @@ export class ProjectionFormComponent implements OnInit {
     this.loading.set(true);
     const { name } = this.form.getRawValue();
 
-    this.projectionsService.create(this.courseId, name).subscribe({
-      next: () => {
-        this.notification.success(this.translate.instant('common.created'));
-        this.router.navigate(['/courses', this.courseId, 'projections']);
-      },
-      error: () => this.loading.set(false),
-    });
+    if (this.isEditMode()) {
+      this.projectionsService.updateName(this.courseId, this.projectionId, name).subscribe({
+        next: () => {
+          this.notification.success(this.translate.instant('common.updated'));
+          this.router.navigate(['/courses', this.courseId, 'projections']);
+        },
+        error: () => this.loading.set(false),
+      });
+    } else {
+      this.projectionsService.create(this.courseId, name).subscribe({
+        next: () => {
+          this.notification.success(this.translate.instant('common.created'));
+          this.router.navigate(['/courses', this.courseId, 'projections']);
+        },
+        error: () => this.loading.set(false),
+      });
+    }
   }
 }

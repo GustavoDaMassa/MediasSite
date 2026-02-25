@@ -57,6 +57,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'courses/:courseId/projections/:projectionId/edit',
+    loadComponent: () =>
+      import('./features/projections/projection-form/projection-form.component').then(
+        (m) => m.ProjectionFormComponent,
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: 'courses/:courseId/projections/:projectionId/assessments/:assessmentId/grade',
     loadComponent: () =>
       import('./features/assessments/assessment-grade/assessment-grade.component').then(
@@ -70,6 +78,12 @@ export const routes: Routes = [
       import('./features/overview/user-overview/user-overview.component').then(
         (m) => m.UserOverviewComponent,
       ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./features/profile/profile.component').then((m) => m.ProfileComponent),
     canActivate: [authGuard],
   },
   { path: '**', redirectTo: 'login' },
