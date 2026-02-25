@@ -9,8 +9,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DecimalPipe } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { forkJoin } from 'rxjs';
 
 import { ProjectionsService } from '../projections.service';
+import { CoursesService } from '../../courses/courses.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import {
   ConfirmDialogComponent,
@@ -41,11 +44,14 @@ export class ProjectionListComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly projectionsService = inject(ProjectionsService);
+  private readonly coursesService = inject(CoursesService);
+  private readonly authService = inject(AuthService);
   private readonly notification = inject(NotificationService);
   private readonly translate = inject(TranslateService);
   private readonly dialog = inject(MatDialog);
 
   readonly projections = signal<ProjectionDTO[]>([]);
+  readonly courseName = signal('');
   readonly loading = signal(true);
   courseId = 0;
 
@@ -53,14 +59,22 @@ export class ProjectionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.params['courseId']);
-    this.loadProjections();
+    this.loadData();
   }
 
-  private loadProjections(): void {
+  private loadData(): void {
     this.loading.set(true);
-    this.projectionsService.list(this.courseId).subscribe({
-      next: (projections) => {
+    const user = this.authService.currentUser();
+    if (!user) return;
+
+    forkJoin({
+      projections: this.projectionsService.list(this.courseId),
+      courses: this.coursesService.list(user.id),
+    }).subscribe({
+      next: ({ projections, courses }) => {
         this.projections.set(projections);
+        const course = courses.find((c) => c.id === this.courseId);
+        if (course) this.courseName.set(course.name);
         this.loading.set(false);
       },
       error: () => this.loading.set(false),

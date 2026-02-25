@@ -6,7 +6,7 @@
         {{ 'nav.courses' | translate }}
       </a>
       <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>
-      <span>{{ 'projections.title' | translate: { course: '' } }}</span>
+      <span>{{ 'projections.title' | translate: { course: courseName() } }}</span>
     </div>
     <a mat-flat-button [routerLink]="['/courses', courseId, 'projections', 'new']">
       <mat-icon>add</mat-icon>
