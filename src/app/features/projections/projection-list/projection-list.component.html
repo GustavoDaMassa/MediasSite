@@ -80,7 +80,7 @@
                 <th mat-header-cell *matHeaderCellDef>{{ 'assessments.grade' | translate }}</th>
                 <td mat-cell *matCellDef="let a">
                   @if (isGraded(a)) {
-                    <span [class]="a.grade >= 6 ? 'grade-ok' : 'grade-fail'">
+                    <span class="grade-value">
                       {{ a.grade | number: '1.1-2' }}
                     </span>
                   } @else {

@@ -192,6 +192,11 @@
   margin-left: 2px;
 }
 
+.grade-value {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
 .grade-empty {
   color: var(--color-text-muted);
   font-style: italic;
