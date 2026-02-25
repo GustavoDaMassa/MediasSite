@@ -42,7 +42,8 @@ export class UserOverviewComponent implements OnInit {
           [...projections].sort((a, b) => {
             const aAuto = a.name === a.courseName ? 0 : 1;
             const bAuto = b.name === b.courseName ? 0 : 1;
-            return aAuto - bAuto;
+            if (aAuto !== bAuto) return aAuto - bAuto;
+            return (a.courseName ?? '').localeCompare(b.courseName ?? '');
           }),
         );
         this.loading.set(false);
