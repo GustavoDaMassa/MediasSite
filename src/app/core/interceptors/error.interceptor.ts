@@ -15,20 +15,19 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       const auth = injector.get(AuthService);
 
       let messageKey = 'errors.unexpected';
+      let rawMessage: string | null = null;
 
       switch (error.status) {
         case 0:
           messageKey = 'errors.connection_error';
           break;
         case 400:
-          messageKey = 'errors.unexpected';
+          rawMessage = error.error?.error ?? null;
           break;
         case 401:
           if (auth.isAuthenticated()) {
             auth.logout();
             messageKey = 'errors.session_expired';
-          } else {
-            messageKey = 'errors.unexpected';
           }
           break;
         case 403:
@@ -42,7 +41,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
       }
 
-      notification.error(translate.instant(messageKey));
+      const message = rawMessage ?? translate.instant(messageKey);
+      notification.error(message);
       return throwError(() => error);
     }),
   );
