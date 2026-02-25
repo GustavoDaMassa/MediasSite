@@ -38,7 +38,13 @@ export class UserOverviewComponent implements OnInit {
     if (!user) return;
     this.coursesService.listAllProjections(user.id).subscribe({
       next: (projections) => {
-        this.projections.set(projections);
+        this.projections.set(
+          [...projections].sort((a, b) => {
+            const aAuto = a.name === a.courseName ? 0 : 1;
+            const bAuto = b.name === b.courseName ? 0 : 1;
+            return aAuto - bAuto;
+          }),
+        );
         this.loading.set(false);
       },
       error: () => this.loading.set(false),
