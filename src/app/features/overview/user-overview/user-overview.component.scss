@@ -150,8 +150,8 @@
   font-size: var(--font-xs);
 
   &--graded {
-    border-color: var(--color-grade-ok-bg);
-    background-color: var(--color-grade-ok-bg);
+    border-color: var(--color-primary-subtle);
+    background-color: var(--color-primary-subtle);
   }
 
   &__id {
@@ -162,6 +162,10 @@
 
   &__value {
     font-weight: 700;
+  }
+
+  .grade-ok {
+    color: var(--color-primary);
   }
 }
 
