@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CourseDTO, CreateCourseRequest, ProjectionDTO } from '../../shared/models';
@@ -13,8 +13,8 @@ export class CoursesService {
     return this.http.get<CourseDTO[]>(`${this.base}/api/v1/${userId}/courses`);
   }
 
-  create(userId: number, req: CreateCourseRequest): Observable<CourseDTO> {
-    return this.http.post<CourseDTO>(`${this.base}/api/v1/${userId}/courses`, req);
+  create(userId: number, req: CreateCourseRequest, context?: HttpContext): Observable<CourseDTO> {
+    return this.http.post<CourseDTO>(`${this.base}/api/v1/${userId}/courses`, req, { context });
   }
 
   updateName(userId: number, courseId: number, name: string): Observable<CourseDTO> {
@@ -23,10 +23,11 @@ export class CoursesService {
     });
   }
 
-  updateMethod(userId: number, courseId: number, method: string): Observable<CourseDTO> {
+  updateMethod(userId: number, courseId: number, method: string, context?: HttpContext): Observable<CourseDTO> {
     return this.http.patch<CourseDTO>(
       `${this.base}/api/v1/${userId}/courses/${courseId}/method`,
       { string: method },
+      { context },
     );
   }
 
@@ -41,11 +42,12 @@ export class CoursesService {
     userId: number,
     courseId: number,
     changes: { name?: string; method?: string; cutOff?: number },
+    context?: HttpContext,
   ): Observable<CourseDTO[]> {
     const ops: Observable<CourseDTO>[] = [];
     if (changes.name !== undefined) ops.push(this.updateName(userId, courseId, changes.name));
     if (changes.method !== undefined)
-      ops.push(this.updateMethod(userId, courseId, changes.method));
+      ops.push(this.updateMethod(userId, courseId, changes.method, context));
     if (changes.cutOff !== undefined)
       ops.push(this.updateCutOff(userId, courseId, changes.cutOff));
     return forkJoin(ops);

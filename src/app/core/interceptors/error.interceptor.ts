@@ -1,12 +1,17 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injector } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { SKIP_ERROR_NOTIFICATION } from './http-context.tokens';
 import { NotificationService } from '../services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../services/auth.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const injector = inject(Injector);
+
+  if (req.context.get(SKIP_ERROR_NOTIFICATION)) {
+    return next(req).pipe(catchError((error) => throwError(() => error)));
+  }
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {

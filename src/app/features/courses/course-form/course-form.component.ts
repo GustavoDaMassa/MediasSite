@@ -8,8 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { HttpContext } from '@angular/common/http';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FormulaHelpDialogComponent } from './formula-help-dialog.component';
+import { SKIP_ERROR_NOTIFICATION } from '../../../core/interceptors/http-context.tokens';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { CoursesService } from '../courses.service';
@@ -48,6 +50,9 @@ export class CourseFormComponent implements OnInit {
   readonly loading = signal(false);
   readonly loadingData = signal(false);
   readonly isEditMode = signal(false);
+  readonly formError = signal<string | null>(null);
+
+  private readonly skipErrorCtx = new HttpContext().set(SKIP_ERROR_NOTIFICATION, true);
 
   private courseId = 0;
   private originalValues = { name: '', method: '', cutOff: 6.0 };
@@ -100,6 +105,7 @@ export class CourseFormComponent implements OnInit {
     if (!user) return;
 
     this.loading.set(true);
+    this.formError.set(null);
     const { name, averageMethod, cutOffGrade } = this.form.getRawValue();
 
     if (this.isEditMode()) {
@@ -113,22 +119,28 @@ export class CourseFormComponent implements OnInit {
         return;
       }
 
-      this.coursesService.update(user.id, this.courseId, changes).subscribe({
+      this.coursesService.update(user.id, this.courseId, changes, this.skipErrorCtx).subscribe({
         next: () => {
           this.notification.success(this.translate.instant('common.updated'));
           this.router.navigate(['/courses']);
         },
-        error: () => this.loading.set(false),
+        error: (err) => {
+          this.formError.set(err.error?.error ?? this.translate.instant('errors.unexpected'));
+          this.loading.set(false);
+        },
       });
     } else {
       this.coursesService
-        .create(user.id, { name, averageMethod, cutOffGrade })
+        .create(user.id, { name, averageMethod, cutOffGrade }, this.skipErrorCtx)
         .subscribe({
           next: () => {
             this.notification.success(this.translate.instant('common.created'));
             this.router.navigate(['/courses']);
           },
-          error: () => this.loading.set(false),
+          error: (err) => {
+            this.formError.set(err.error?.error ?? this.translate.instant('errors.unexpected'));
+            this.loading.set(false);
+          },
         });
     }
   }
