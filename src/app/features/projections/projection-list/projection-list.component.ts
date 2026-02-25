@@ -52,6 +52,7 @@ export class ProjectionListComponent implements OnInit {
 
   readonly projections = signal<ProjectionDTO[]>([]);
   readonly courseName = signal('');
+  readonly cutOffGrade = signal(6);
   readonly loading = signal(true);
   courseId = 0;
 
@@ -74,7 +75,10 @@ export class ProjectionListComponent implements OnInit {
       next: ({ projections, courses }) => {
         this.projections.set(projections);
         const course = courses.find((c) => c.id === this.courseId);
-        if (course) this.courseName.set(course.name);
+        if (course) {
+          this.courseName.set(course.name);
+          this.cutOffGrade.set(course.cutOffGrade);
+        }
         this.loading.set(false);
       },
       error: () => this.loading.set(false),
@@ -87,7 +91,7 @@ export class ProjectionListComponent implements OnInit {
 
   getFinalGradeClass(projection: ProjectionDTO): string {
     if (projection.finalGrade === 0) return '';
-    return projection.finalGrade >= 6 ? 'grade-ok' : 'grade-fail';
+    return projection.finalGrade >= this.cutOffGrade() ? 'grade-ok' : 'grade-fail';
   }
 
   navigateToEdit(projection: ProjectionDTO): void {
