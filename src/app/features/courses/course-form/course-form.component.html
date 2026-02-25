@@ -39,7 +39,7 @@
               mat-icon-button
               matSuffix
               type="button"
-              [matTooltip]="'courses.formula_help_body' | translate"
+              (click)="openFormulaHelp()"
             >
               <mat-icon>help_outline</mat-icon>
             </button>

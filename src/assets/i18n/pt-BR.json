@@ -14,7 +14,8 @@
     "confirm": "Confirmar",
     "yes": "Sim",
     "no": "Não",
-    "empty": "Nenhum item encontrado."
+    "empty": "Nenhum item encontrado.",
+    "close": "Fechar"
   },
   "auth": {
     "login": "Entrar",
@@ -45,8 +46,17 @@
     "cutoff": "Nota de corte",
     "cutoff_default": "Padrão: 6.0",
     "formula_hint": "Ex: (0.4*AV1)+(0.6*AV2) | AV1[15] | @M[6](AT1;AT2;AT3)/3",
-    "formula_help_title": "Como usar a fórmula",
+    "formula_help_title": "Como usar a fórmula de cálculo",
     "formula_help_body": "Use identificadores como AV1, AT1. Para nota máxima customizada: AV1[15]. Para selecionar as N maiores: @M[N](AV1;AV2;...)/N",
+    "formula_help_intro": "A fórmula define como a nota final de cada projeção é calculada a partir das avaliações lançadas.",
+    "formula_help_identifiers_title": "1. Identificadores",
+    "formula_help_identifiers_body": "Use nomes livres para representar cada avaliação. Os mesmos nomes devem ser usados ao lançar notas nas projeções.",
+    "formula_help_ops_title": "2. Operações aritméticas",
+    "formula_help_ops_body": "Use +, -, * e / livremente. Para médias ponderadas, multiplique cada nota pelo seu peso antes de somar.",
+    "formula_help_maxgrade_title": "3. Nota máxima personalizada",
+    "formula_help_maxgrade_body": "Adicione [N] após o identificador para indicar que a nota máxima daquela avaliação não é 10. O sistema normaliza o valor automaticamente.",
+    "formula_help_topn_title": "4. Selecionar as N maiores notas",
+    "formula_help_topn_body": "Use @M[N](id1;id2;...) para somar as N maiores notas da lista. Útil quando há avaliações opcionais, substituições ou recuperações.",
     "delete_title": "Excluir disciplina",
     "delete_message": "Tem certeza que deseja excluir a disciplina \"{{name}}\"? Todas as projeções serão removidas.",
     "projections_link": "Ver projeções"

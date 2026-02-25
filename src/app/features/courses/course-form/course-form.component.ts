@@ -7,8 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { FormulaHelpDialogComponent } from './formula-help-dialog.component';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { CoursesService } from '../courses.service';
@@ -27,7 +28,7 @@ import { LoadingSpinnerComponent } from '../../../shared/components/loading-spin
     MatButtonModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatTooltipModule,
+    MatDialogModule,
     TranslatePipe,
     LoadingSpinnerComponent,
   ],
@@ -42,6 +43,7 @@ export class CourseFormComponent implements OnInit {
   private readonly coursesService = inject(CoursesService);
   private readonly notification = inject(NotificationService);
   private readonly translate = inject(TranslateService);
+  private readonly dialog = inject(MatDialog);
 
   readonly loading = signal(false);
   readonly loadingData = signal(false);
@@ -55,6 +57,10 @@ export class CourseFormComponent implements OnInit {
     averageMethod: ['', [Validators.required]],
     cutOffGrade: [6.0, [Validators.required, Validators.min(0), Validators.max(10)]],
   });
+
+  openFormulaHelp(): void {
+    this.dialog.open(FormulaHelpDialogComponent, { width: '560px' });
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['courseId'];

@@ -14,7 +14,8 @@
     "confirm": "Confirm",
     "yes": "Yes",
     "no": "No",
-    "empty": "No items found."
+    "empty": "No items found.",
+    "close": "Close"
   },
   "auth": {
     "login": "Sign in",
@@ -45,8 +46,17 @@
     "cutoff": "Passing grade",
     "cutoff_default": "Default: 6.0",
     "formula_hint": "Ex: (0.4*AV1)+(0.6*AV2) | AV1[15] | @M[6](AT1;AT2;AT3)/3",
-    "formula_help_title": "How to use the formula",
+    "formula_help_title": "How to use the calculation formula",
     "formula_help_body": "Use identifiers like AV1, AT1. For custom max grade: AV1[15]. To select N highest: @M[N](AV1;AV2;...)/N",
+    "formula_help_intro": "The formula defines how the final grade for each projection is calculated from the entered assessment grades.",
+    "formula_help_identifiers_title": "1. Identifiers",
+    "formula_help_identifiers_body": "Use any names to represent each assessment. The same names must be used when entering grades in projections.",
+    "formula_help_ops_title": "2. Arithmetic operations",
+    "formula_help_ops_body": "Use +, -, * and / freely. For weighted averages, multiply each grade by its weight before adding.",
+    "formula_help_maxgrade_title": "3. Custom maximum grade",
+    "formula_help_maxgrade_body": "Add [N] after the identifier to indicate that the maximum grade for that assessment is not 10. The system normalizes the value automatically.",
+    "formula_help_topn_title": "4. Select the N highest grades",
+    "formula_help_topn_body": "Use @M[N](id1;id2;...) to sum the N highest grades in the list. Useful when there are optional assessments, substitutions or retakes.",
     "delete_title": "Delete course",
     "delete_message": "Are you sure you want to delete the course \"{{name}}\"? All projections will be removed.",
     "projections_link": "View projections"
