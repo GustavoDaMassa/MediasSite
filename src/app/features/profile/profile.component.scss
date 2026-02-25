@@ -1,0 +1,22 @@
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 600px;
+}
+
+.profile-card {
+  &--danger {
+    border: 1px solid var(--mat-sys-error, #b00020);
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}

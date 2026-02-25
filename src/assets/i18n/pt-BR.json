@@ -32,7 +32,8 @@
   },
   "nav": {
     "courses": "Disciplinas",
-    "overview": "Visão Geral"
+    "overview": "Visão Geral",
+    "profile": "Meu Perfil"
   },
   "courses": {
     "title": "Minhas Disciplinas",
@@ -94,6 +95,14 @@
     "server_error": "Erro interno do servidor. Tente novamente.",
     "connection_error": "Sem conexão com o servidor.",
     "unexpected": "Ocorreu um erro inesperado."
+  },
+  "profile": {
+    "title": "Meu Perfil",
+    "update_name": "Atualizar nome",
+    "update_email": "Atualizar e-mail",
+    "delete_account": "Excluir conta",
+    "delete_title": "Excluir conta",
+    "delete_message": "Tem certeza que deseja excluir sua conta? Esta ação é irreversível."
   },
   "theme": {
     "toggle_dark": "Alternar para tema escuro",

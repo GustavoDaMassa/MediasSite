@@ -32,7 +32,8 @@
   },
   "nav": {
     "courses": "Courses",
-    "overview": "Overview"
+    "overview": "Overview",
+    "profile": "My Profile"
   },
   "courses": {
     "title": "My Courses",
@@ -94,6 +95,14 @@
     "server_error": "Internal server error. Please try again.",
     "connection_error": "No connection to server.",
     "unexpected": "An unexpected error occurred."
+  },
+  "profile": {
+    "title": "My Profile",
+    "update_name": "Update name",
+    "update_email": "Update email",
+    "delete_account": "Delete account",
+    "delete_title": "Delete account",
+    "delete_message": "Are you sure you want to delete your account? This action is irreversible."
   },
   "theme": {
     "toggle_dark": "Switch to dark theme",

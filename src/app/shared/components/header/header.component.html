@@ -52,6 +52,11 @@
         {{ currentUser()?.name }}
       </div>
       <mat-divider></mat-divider>
+      <a mat-menu-item routerLink="/profile">
+        <mat-icon>manage_accounts</mat-icon>
+        {{ 'nav.profile' | translate }}
+      </a>
+      <mat-divider></mat-divider>
       <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         {{ 'auth.logout' | translate }}

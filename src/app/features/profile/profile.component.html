@@ -1,0 +1,85 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'profile.title' | translate }}</h1>
+  </div>
+
+  <div class="profile-content">
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>{{ 'profile.update_name' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="nameForm" (ngSubmit)="updateName()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'auth.name' | translate }}</mat-label>
+            <input matInput formControlName="name" />
+            @if (nameForm.controls.name.hasError('required')) {
+              <mat-error>{{ 'validation.required' | translate }}</mat-error>
+            } @else if (nameForm.controls.name.hasError('minlength')) {
+              <mat-error>{{ 'validation.min_length' | translate: { min: 2 } }}</mat-error>
+            }
+          </mat-form-field>
+          <div class="form-actions">
+            <button mat-flat-button type="submit" [disabled]="loadingName()">
+              @if (loadingName()) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                {{ 'common.save' | translate }}
+              }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>{{ 'profile.update_email' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'auth.email' | translate }}</mat-label>
+            <input matInput formControlName="email" type="email" />
+            @if (emailForm.controls.email.hasError('required')) {
+              <mat-error>{{ 'validation.required' | translate }}</mat-error>
+            } @else if (emailForm.controls.email.hasError('email')) {
+              <mat-error>{{ 'validation.email' | translate }}</mat-error>
+            }
+          </mat-form-field>
+          <div class="form-actions">
+            <button mat-flat-button type="submit" [disabled]="loadingEmail()">
+              @if (loadingEmail()) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                {{ 'common.save' | translate }}
+              }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-divider></mat-divider>
+
+    <mat-card class="profile-card profile-card--danger">
+      <mat-card-header>
+        <mat-card-title>{{ 'profile.delete_account' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-actions">
+          <button mat-flat-button color="warn" [disabled]="loadingDelete()" (click)="confirmDelete()">
+            @if (loadingDelete()) {
+              <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+              <ng-container>
+                <mat-icon>delete_forever</mat-icon>
+                {{ 'profile.delete_account' | translate }}
+              </ng-container>
+            }
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
