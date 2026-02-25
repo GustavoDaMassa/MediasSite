@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://apimediasapi.gustavohdev.com.br';
+const BACKEND_URL = 'http://localhost:8080';
 
 module.exports = {
   '/api': {
