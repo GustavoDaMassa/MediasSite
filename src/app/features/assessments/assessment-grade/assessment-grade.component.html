@@ -34,7 +34,12 @@
             <span class="assessment-info__label">{{ 'assessments.max_value' | translate }}</span>
             <span class="assessment-info__value">{{ effectiveMax() }}</span>
           </div>
-          @if (assessment()!.requiredGrade > 0) {
+          @if (assessment()!.requiredGrade === -1) {
+            <div class="assessment-info__item assessment-info__item--impossible">
+              <mat-icon>warning</mat-icon>
+              <span>{{ 'assessments.impossible_warning' | translate }}</span>
+            </div>
+          } @else if (assessment()!.requiredGrade > 0) {
             <div class="assessment-info__item">
               <span class="assessment-info__label">
                 {{ 'assessments.required_grade' | translate }}

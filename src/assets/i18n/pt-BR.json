@@ -80,7 +80,9 @@
     "insert_grade": "Lançar Nota",
     "current_grade": "Nota atual: {{grade}}",
     "pending": "--",
-    "grade_hint": "Nota entre 0 e {{max}}"
+    "grade_hint": "Nota entre 0 e {{max}}",
+    "impossible": "Impossível",
+    "impossible_warning": "A nota de corte não pode mais ser atingida nesta projeção."
   },
   "overview": {
     "title": "Visão Geral",

@@ -95,7 +95,11 @@
                 </th>
                 <td mat-cell *matCellDef="let a">
                   @if (!isGraded(a)) {
-                    <span class="grade-pending">{{ a.requiredGrade | number: '1.1-2' }}</span>
+                    @if (a.requiredGrade === -1) {
+                      <span class="grade-impossible">{{ 'assessments.impossible' | translate }}</span>
+                    } @else {
+                      <span class="grade-pending">{{ a.requiredGrade | number: '1.1-2' }}</span>
+                    }
                   } @else {
                     <span class="grade-empty">—</span>
                   }

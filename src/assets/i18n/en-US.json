@@ -80,7 +80,9 @@
     "insert_grade": "Enter Grade",
     "current_grade": "Current grade: {{grade}}",
     "pending": "--",
-    "grade_hint": "Grade between 0 and {{max}}"
+    "grade_hint": "Grade between 0 and {{max}}",
+    "impossible": "Impossible",
+    "impossible_warning": "The passing grade can no longer be achieved in this projection."
   },
   "overview": {
     "title": "Overview",

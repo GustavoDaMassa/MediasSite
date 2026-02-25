@@ -202,6 +202,14 @@
   font-style: italic;
 }
 
+.grade-impossible {
+  color: var(--color-error);
+  font-weight: 600;
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
 @media (max-width: 600px) {
   .page-header {
     flex-direction: column;
