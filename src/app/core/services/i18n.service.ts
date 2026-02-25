@@ -15,6 +15,10 @@ export class I18nService {
 
   readonly currentLang = signal<string>(environment.defaultLang);
 
+  constructor() {
+    this.init();
+  }
+
   init(): void {
     this.translate.addLangs(['pt-BR', 'en-US']);
     this.translate.setDefaultLang('pt-BR');
