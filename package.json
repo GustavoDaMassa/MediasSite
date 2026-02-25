@@ -41,6 +41,9 @@
     "@angular/build": "^21.1.5",
     "@angular/cli": "^21.1.5",
     "@angular/compiler-cli": "^21.1.0",
-    "typescript": "~5.9.2"
+    "@vitest/coverage-v8": "^4.0.18",
+    "jsdom": "^28.1.0",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.18"
   }
 }
