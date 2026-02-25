@@ -20,11 +20,10 @@
     flex-shrink: 0;
   }
 
-  &__logo-icon {
-    color: var(--color-primary);
-    font-size: 26px;
-    width: 26px;
-    height: 26px;
+  &__logo-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   &__logo-text {
