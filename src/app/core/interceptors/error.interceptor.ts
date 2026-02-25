@@ -14,15 +14,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       const translate = injector.get(TranslateService);
       const auth = injector.get(AuthService);
 
+      const backendMessage: string | null = error.error?.error ?? null;
       let messageKey = 'errors.unexpected';
-      let rawMessage: string | null = null;
 
       switch (error.status) {
         case 0:
           messageKey = 'errors.connection_error';
-          break;
-        case 400:
-          rawMessage = error.error?.error ?? null;
           break;
         case 401:
           if (auth.isAuthenticated()) {
@@ -33,16 +30,19 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         case 403:
           messageKey = 'errors.no_permission';
           break;
+        case 400:
         case 404:
-          messageKey = 'errors.not_found';
-          break;
         case 500:
-          messageKey = 'errors.server_error';
+          if (backendMessage) {
+            notification.error(backendMessage);
+            return throwError(() => error);
+          }
+          if (error.status === 404) messageKey = 'errors.not_found';
+          if (error.status === 500) messageKey = 'errors.server_error';
           break;
       }
 
-      const message = rawMessage ?? translate.instant(messageKey);
-      notification.error(message);
+      notification.error(translate.instant(messageKey));
       return throwError(() => error);
     }),
   );
