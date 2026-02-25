@@ -24,8 +24,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           messageKey = 'errors.unexpected';
           break;
         case 401:
-          auth.logout();
-          messageKey = 'errors.session_expired';
+          if (auth.isAuthenticated()) {
+            auth.logout();
+            messageKey = 'errors.session_expired';
+          } else {
+            messageKey = 'errors.unexpected';
+          }
           break;
         case 403:
           messageKey = 'errors.no_permission';
