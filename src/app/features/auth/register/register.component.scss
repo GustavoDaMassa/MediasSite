@@ -22,11 +22,10 @@
     margin-bottom: var(--spacing-sm);
   }
 
-  &__icon {
-    color: var(--color-primary);
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
+  &__logo-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
   }
 
   &__title {
