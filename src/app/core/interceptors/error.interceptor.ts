@@ -43,7 +43,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             return throwError(() => error);
           }
           if (error.status === 404) messageKey = 'errors.not_found';
-          if (error.status === 500) messageKey = 'errors.server_error';
+          else if (error.status === 500) messageKey = 'errors.server_error';
           break;
       }
 
