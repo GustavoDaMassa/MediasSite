@@ -1,59 +1,71 @@
-# MediasFrontend
+# MediasSite
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+> Interface web para a [MediasAPI](https://github.com/GustavoDaMassa/MediasAPI) — gerenciamento de notas e projeções acadêmicas.
 
-## Development server
+---
 
-To start a local development server, run:
+## Apresentação
 
-```bash
-ng serve
-```
+Frontend Angular da MediasAPI. Permite aos usuários gerenciar disciplinas, criar projeções de notas e acompanhar o desempenho acadêmico de forma visual e interativa.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Principais funcionalidades
 
-## Code scaffolding
+- Autenticação com JWT (login, guarda de rotas, renovação de sessão)
+- Gerenciamento de disciplinas e métodos de cálculo personalizados
+- Criação e visualização de projeções por disciplina
+- Lançamento de notas e cálculo automático de média e nota necessária
+- Perfil do usuário (atualizar nome, email, excluir conta)
+- Internacionalização: Português (BR) e Inglês (US)
+- Tema claro e escuro
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tecnologias
 
-```bash
-ng generate component component-name
-```
+- [Angular](https://angular.dev/) com standalone components
+- [Angular Material](https://material.angular.io/) (MD3)
+- [ngx-translate](https://github.com/ngx-translate/core) para i18n
+- SCSS com suporte a theming dark/light
+- Angular Signals para gerenciamento de estado
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Como executar
 
-```bash
-ng generate --help
-```
+### Pré-requisitos
 
-## Building
+- [Node.js](https://nodejs.org/) v20+
+- [MediasAPI](https://github.com/GustavoDaMassa/MediasAPI) rodando em `http://localhost:8080`
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Passos
 
 ```bash
-ng test
+# Clonar o repositório
+git clone https://github.com/GustavoDaMassa/MediasSite.git
+cd MediasSite/medias-frontend
+
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
+npm start
 ```
 
-## Running end-to-end tests
+Acesse `http://localhost:3000/`. As requisições para `/api` são redirecionadas automaticamente para `http://localhost:8080` via proxy.
 
-For end-to-end (e2e) testing, run:
+### Build de produção
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Os artefatos são gerados em `dist/`.
 
-## Additional Resources
+## Estrutura do projeto
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+src/
+├── app/
+│   ├── core/          # Services, guards, interceptors (singleton)
+│   ├── shared/        # Componentes e modelos reutilizáveis
+│   └── features/      # Módulos por domínio (auth, courses, projections, profile)
+├── assets/
+│   └── i18n/          # Arquivos de tradução (pt-BR.json, en-US.json)
+└── environments/      # Configurações por ambiente
+```
