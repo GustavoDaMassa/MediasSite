@@ -10,6 +10,8 @@ import { ProjectionsService } from '../projections.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectionDTO } from '../../../shared/models';
+import { CoursesService } from '../../courses/courses.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 const mockProjections: ProjectionDTO[] = [
   { id: 1, name: 'Cenário A', assessment: [], finalGrade: 7.5 },
@@ -20,6 +22,12 @@ describe('ProjectionListComponent', () => {
   const mockProjectionsService = {
     list: vi.fn().mockReturnValue(of(mockProjections)),
     delete: vi.fn().mockReturnValue(of(undefined)),
+  };
+  const mockCoursesService = {
+    list: vi.fn().mockReturnValue(of([{ id: 10, name: 'Math', cutOffGrade: 6 }])),
+  };
+  const mockAuthService = {
+    currentUser: vi.fn().mockReturnValue({ id: 1 }),
   };
   const mockNotification = { success: vi.fn() };
   const mockDialog = {
@@ -38,6 +46,8 @@ describe('ProjectionListComponent', () => {
         provideNoopAnimations(),
         provideRouter([]),
         { provide: ProjectionsService, useValue: mockProjectionsService },
+        { provide: CoursesService, useValue: mockCoursesService },
+        { provide: AuthService, useValue: mockAuthService },
         { provide: NotificationService, useValue: mockNotification },
         { provide: MatDialog, useValue: mockDialog },
         { provide: ActivatedRoute, useValue: mockRoute },
