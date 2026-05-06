@@ -211,9 +211,30 @@
 }
 
 @media (max-width: 600px) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+
   .page-header {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-sm);
+  }
+
+  .projection-card {
+    &__title-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+    }
+
+    &__header-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    mat-card-content {
+      overflow-x: auto;
+    }
   }
 }

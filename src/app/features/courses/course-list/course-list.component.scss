@@ -160,6 +160,10 @@
 }
 
 @media (max-width: 600px) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+
   .courses-grid {
     grid-template-columns: 1fr;
   }

@@ -84,3 +84,9 @@
   gap: var(--spacing-sm);
   margin-top: var(--spacing-sm);
 }
+
+@media (max-width: 600px) {
+  .form-page {
+    padding: var(--spacing-md);
+  }
+}

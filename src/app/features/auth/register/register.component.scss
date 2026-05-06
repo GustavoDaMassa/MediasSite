@@ -80,3 +80,11 @@
   font-size: var(--font-md);
   font-weight: 600;
 }
+
+@media (max-width: 600px) {
+  .auth-page {
+    padding: var(--spacing-md);
+    align-items: flex-start;
+    padding-top: var(--spacing-xl);
+  }
+}

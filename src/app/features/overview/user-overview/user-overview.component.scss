@@ -170,6 +170,10 @@
 }
 
 @media (max-width: 600px) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+
   .overview-card {
     &__header {
       flex-direction: column;
