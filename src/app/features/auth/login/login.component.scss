@@ -2,9 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 56px);
+  min-height: 100vh;
+  margin-top: calc(-1 * var(--spacing-xl));
   padding: var(--spacing-lg);
-  background-color: var(--color-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+:host-context(html[data-theme='light']) .auth-page {
+  background-image: url('/modoclaroback.jpg');
+}
+
+:host-context(html[data-theme='dark']) .auth-page {
+  background-image: url('/modoescuroback.jpg');
 }
 
 .auth-card {
@@ -14,6 +25,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
+  backdrop-filter: blur(8px);
 
   mat-card-header {
     flex-direction: column;

@@ -35,6 +35,7 @@ html {
 
 // Sobrescreve tokens do Material M3 para usar a cor da logo
 html[data-theme='light'] {
+  background-color: #0288d1;
   --mat-sys-primary: #0288d1;
   --mat-sys-on-primary: #ffffff;
   --mat-sys-primary-container: #cce8f4;
@@ -44,6 +45,7 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
+  background-color: #004d63;
   --mat-sys-primary: #32befa;
   --mat-sys-on-primary: #003545;
   --mat-sys-primary-container: #004d63;
