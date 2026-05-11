@@ -1,4 +1,13 @@
-<app-header />
-<main>
-  <router-outlet />
-</main>
+<mat-sidenav-container class="app-container">
+  <mat-sidenav #sidenav mode="over" position="start">
+    <app-sidenav (close)="sidenav.close()" />
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-icon-button class="app-menu-btn" (click)="sidenav.toggle()">
+      <img src="assets/logo.png" alt="MediasAPI" class="app-menu-btn__img" />
+    </button>
+    <main>
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

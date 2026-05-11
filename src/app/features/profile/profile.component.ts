@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +24,7 @@ import {
   selector: 'app-profile',
   standalone: true,
   imports: [
+    RouterLink,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,

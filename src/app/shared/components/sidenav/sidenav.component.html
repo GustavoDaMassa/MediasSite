@@ -1,0 +1,52 @@
+<div class="sidenav">
+  <div class="sidenav__header">
+    <div class="sidenav__logo">
+      <img src="assets/logo.png" alt="MediasAPI" class="sidenav__logo-img" />
+      <span class="sidenav__logo-text">MediasAPI</span>
+    </div>
+    <button mat-icon-button (click)="close.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  @if (isAuthenticated()) {
+    <mat-divider />
+
+    <div class="sidenav__user">
+      <div class="sidenav__initials">{{ userInitials() }}</div>
+      <span class="sidenav__user-name">{{ currentUser()?.name }}</span>
+    </div>
+
+    <mat-divider />
+
+    <nav class="sidenav__nav">
+      <a
+        mat-button
+        class="sidenav__nav-item"
+        routerLink="/profile"
+        (click)="close.emit()"
+      >
+        <mat-icon>manage_accounts</mat-icon>
+        {{ 'nav.profile' | translate }}
+      </a>
+
+      <button mat-button class="sidenav__nav-item" (click)="toggleTheme()">
+        <mat-icon>{{ themeIcon() }}</mat-icon>
+        {{ themeLabel() | translate }}
+      </button>
+
+      <button mat-button class="sidenav__nav-item" (click)="toggleLang()">
+        <mat-icon>language</mat-icon>
+        {{ nextLangLabel() }}
+      </button>
+    </nav>
+
+    <div class="sidenav__footer">
+      <mat-divider />
+      <button mat-button class="sidenav__nav-item sidenav__logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        {{ 'auth.logout' | translate }}
+      </button>
+    </div>
+  }
+</div>

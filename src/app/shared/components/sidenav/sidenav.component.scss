@@ -1,0 +1,108 @@
+.sidenav {
+  width: 260px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-sm) 0 var(--spacing-md);
+    height: 56px;
+    flex-shrink: 0;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  &__logo-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  &__logo-text {
+    font-weight: 700;
+    font-size: var(--font-md);
+    color: var(--color-text-primary);
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: -0.3px;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+
+  &__initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: var(--font-xs);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+
+  &__user-name {
+    font-weight: 600;
+    font-size: var(--font-sm);
+    color: var(--color-text-primary);
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xs) 0;
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    width: 100%;
+    color: var(--color-text-secondary);
+    font-size: var(--font-sm);
+    text-transform: none;
+    letter-spacing: 0;
+    border-radius: 0;
+    height: 44px;
+
+    mat-icon {
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: var(--color-surface-hover);
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+
+  &__logout {
+    color: var(--color-error) !important;
+    width: 100%;
+
+    mat-icon {
+      color: var(--color-error) !important;
+    }
+  }
+}
