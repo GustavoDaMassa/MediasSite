@@ -16,6 +16,7 @@ import {
   ConfirmDialogData,
 } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from '../../../shared/components/empty-state/empty-state.component';
 import { CourseDTO } from '../../../shared/models';
 
 @Component({
@@ -30,6 +31,7 @@ import { CourseDTO } from '../../../shared/models';
     MatChipsModule,
     TranslatePipe,
     LoadingSpinnerComponent,
+    EmptyStateComponent,
   ],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.scss',

@@ -11,6 +11,7 @@ import { forkJoin } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { CoursesService } from '../../courses/courses.service';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from '../../../shared/components/empty-state/empty-state.component';
 import { AssessmentDTO, ProjectionDTO } from '../../../shared/models';
 
 @Component({
@@ -25,6 +26,7 @@ import { AssessmentDTO, ProjectionDTO } from '../../../shared/models';
     DecimalPipe,
     TranslatePipe,
     LoadingSpinnerComponent,
+    EmptyStateComponent,
   ],
   templateUrl: './user-overview.component.html',
   styleUrl: './user-overview.component.scss',

@@ -20,6 +20,7 @@ import {
   ConfirmDialogData,
 } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from '../../../shared/components/empty-state/empty-state.component';
 import { AssessmentDTO, ProjectionDTO } from '../../../shared/models';
 
 @Component({
@@ -36,6 +37,7 @@ import { AssessmentDTO, ProjectionDTO } from '../../../shared/models';
     DecimalPipe,
     TranslatePipe,
     LoadingSpinnerComponent,
+    EmptyStateComponent,
   ],
   templateUrl: './projection-list.component.html',
   styleUrl: './projection-list.component.scss',

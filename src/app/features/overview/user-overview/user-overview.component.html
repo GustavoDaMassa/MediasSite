@@ -9,10 +9,7 @@
   @if (loading()) {
     <app-loading-spinner />
   } @else if (projections().length === 0) {
-    <div class="empty-state">
-      <mat-icon>dashboard</mat-icon>
-      <p>{{ 'overview.no_data' | translate }}</p>
-    </div>
+    <app-empty-state icon="dashboard" [message]="'overview.no_data' | translate" />
   } @else {
     <div class="overview-list">
       @for (projection of projections(); track projection.id) {

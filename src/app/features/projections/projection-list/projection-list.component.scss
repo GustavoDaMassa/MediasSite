@@ -51,30 +51,6 @@
   color: var(--color-text-muted);
 }
 
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-2xl);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-lg);
-  text-align: center;
-
-  mat-icon {
-    font-size: 56px;
-    width: 56px;
-    height: 56px;
-    color: var(--color-text-muted);
-  }
-
-  p {
-    color: var(--color-text-secondary);
-    margin: 0;
-    font-size: var(--font-sm);
-  }
-}
-
 .projections-list {
   display: flex;
   flex-direction: column;

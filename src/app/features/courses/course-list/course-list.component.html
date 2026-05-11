@@ -12,13 +12,9 @@
   @if (loading()) {
     <app-loading-spinner />
   } @else if (courses().length === 0) {
-    <div class="empty-state">
-      <mat-icon>menu_book</mat-icon>
-      <p>{{ 'courses.empty' | translate }}</p>
-      <a mat-flat-button routerLink="/courses/new">
-        {{ 'courses.new' | translate }}
-      </a>
-    </div>
+    <app-empty-state icon="menu_book" [message]="'courses.empty' | translate">
+      <a mat-flat-button routerLink="/courses/new">{{ 'courses.new' | translate }}</a>
+    </app-empty-state>
   } @else {
     <div class="courses-grid">
       @for (course of courses(); track course.id) {

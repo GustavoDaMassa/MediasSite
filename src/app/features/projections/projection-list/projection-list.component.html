@@ -17,13 +17,11 @@
   @if (loading()) {
     <app-loading-spinner />
   } @else if (projections().length === 0) {
-    <div class="empty-state">
-      <mat-icon>analytics</mat-icon>
-      <p>{{ 'projections.empty' | translate }}</p>
+    <app-empty-state icon="analytics" [message]="'projections.empty' | translate">
       <a mat-flat-button [routerLink]="['/courses', courseId, 'projections', 'new']">
         {{ 'projections.new' | translate }}
       </a>
-    </div>
+    </app-empty-state>
   } @else {
     <div class="projections-list">
       @for (projection of projections(); track projection.id) {
