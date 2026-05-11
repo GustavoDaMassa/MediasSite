@@ -184,6 +184,10 @@ body {
   --mdc-snackbar-supporting-text-color: #ffffff;
 }
 
+.page-header h1 {
+  letter-spacing: -0.02em;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
