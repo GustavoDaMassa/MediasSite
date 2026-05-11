@@ -1,14 +1,12 @@
 <div class="auth-page">
   <mat-card class="auth-card">
-    <mat-card-header>
-      <div class="auth-card__brand">
-        <img src="assets/logo.png" alt="MediasAPI" class="auth-card__logo-img" />
-        <h1 class="auth-card__title">MediasAPI</h1>
-      </div>
+    <div class="auth-card__header">
+      <img src="assets/logo.png" alt="MediasAPI" class="auth-card__logo" />
+      <h1 class="auth-card__title">MediasAPI</h1>
       <p class="auth-card__subtitle">{{ 'auth.sign_in' | translate }}</p>
-    </mat-card-header>
+    </div>
 
-    <mat-card-content>
+    <mat-card-content class="auth-card__body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>{{ 'auth.email' | translate }}</mat-label>
@@ -30,12 +28,7 @@
             formControlName="password"
             autocomplete="current-password"
           />
-          <button
-            mat-icon-button
-            matSuffix
-            type="button"
-            (click)="hidePassword.set(!hidePassword())"
-          >
+          <button mat-icon-button matSuffix type="button" (click)="hidePassword.set(!hidePassword())">
             <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
           @if (form.controls.password.hasError('required')) {
@@ -43,14 +36,9 @@
           }
         </mat-form-field>
 
-        <button
-          mat-flat-button
-          class="full-width submit-btn"
-          type="submit"
-          [disabled]="loading()"
-        >
+        <button mat-flat-button class="full-width submit-btn" type="submit" [disabled]="loading()">
           @if (loading()) {
-            <mat-spinner diameter="20"></mat-spinner>
+            <mat-spinner diameter="20" />
           } @else {
             {{ 'auth.login' | translate }}
           }
@@ -58,11 +46,9 @@
       </form>
     </mat-card-content>
 
-    <mat-card-footer>
-      <p class="auth-card__footer-text">
-        {{ 'auth.no_account' | translate }}
-        <a routerLink="/register">{{ 'auth.create_account' | translate }}</a>
-      </p>
-    </mat-card-footer>
+    <div class="auth-card__footer">
+      {{ 'auth.no_account' | translate }}
+      <a routerLink="/register">{{ 'auth.create_account' | translate }}</a>
+    </div>
   </mat-card>
 </div>

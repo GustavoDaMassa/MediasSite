@@ -5,44 +5,31 @@
   min-height: 100vh;
   margin-top: calc(-1 * var(--spacing-xl));
   padding: var(--spacing-lg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-:host-context(html[data-theme='light']) .auth-page {
-  background-image: url('/modoclaroback.jpg');
-}
-
-:host-context(html[data-theme='dark']) .auth-page {
-  background-image: url('/modoescuroback.jpg');
 }
 
 .auth-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  backdrop-filter: blur(8px);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 
-  mat-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  &__brand {
+  &__header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
+    text-align: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
   }
 
-  &__logo-img {
-    width: 36px;
-    height: 36px;
+  &__logo {
+    width: 80px;
+    height: 80px;
     object-fit: contain;
+    margin-bottom: var(--spacing-sm);
   }
 
   &__title {
@@ -55,25 +42,30 @@
   &__subtitle {
     font-size: var(--font-sm);
     color: var(--color-text-secondary);
-    margin: 0 0 var(--spacing-lg);
+    margin: 0;
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
+  &__body {
+    padding: 0 !important;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
   }
 
-  &__footer-text {
+  &__footer {
     text-align: center;
+    margin-top: var(--spacing-md);
     font-size: var(--font-sm);
     color: var(--color-text-secondary);
-    margin: var(--spacing-md) 0 0;
 
     a {
       color: var(--color-primary);
       text-decoration: none;
       font-weight: 600;
+      margin-left: var(--spacing-xs);
 
       &:hover {
         text-decoration: underline;
@@ -88,9 +80,10 @@
 
 .submit-btn {
   margin-top: var(--spacing-sm);
-  height: 44px;
+  height: 48px;
   font-size: var(--font-md);
   font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 600px) {
