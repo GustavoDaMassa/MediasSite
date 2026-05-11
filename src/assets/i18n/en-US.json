@@ -85,13 +85,16 @@
     "impossible_warning": "The passing grade can no longer be achieved in this projection."
   },
   "overview": {
-    "title": "Overview",
+    "title": "Courses",
     "subtitle": "All projections across all courses",
     "course": "Course",
     "projection": "Projection",
     "assessments": "Assessments",
     "final_grade": "Final Grade",
-    "no_data": "No projections found."
+    "no_data": "No projections found.",
+    "reset_title": "Clear projection",
+    "reset_message": "Are you sure you want to clear all grades for \"{{name}}\"?",
+    "reset_success": "Projection cleared successfully!"
   },
   "validation": {
     "required": "This field is required.",

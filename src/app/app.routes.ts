@@ -3,7 +3,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { noAuthGuard } from './core/guards/no-auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'courses', pathMatch: 'full' },
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'login',
     loadComponent: () =>
@@ -15,14 +15,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/auth/register/register.component').then((m) => m.RegisterComponent),
     canActivate: [noAuthGuard],
-  },
-  {
-    path: 'courses',
-    loadComponent: () =>
-      import('./features/courses/course-list/course-list.component').then(
-        (m) => m.CourseListComponent,
-      ),
-    canActivate: [authGuard],
   },
   {
     path: 'courses/new',

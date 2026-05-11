@@ -1,32 +1,11 @@
 <mat-toolbar class="header">
-  <a routerLink="/courses" class="header__logo">
+  <a routerLink="/overview" class="header__logo">
     <img src="assets/logo.png" alt="MediasAPI" class="header__logo-img" />
     <span class="header__logo-text">MediasAPI</span>
   </a>
 
   @if (isAuthenticated()) {
-    <nav class="header__nav">
-      <a mat-button routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
-        {{ 'nav.courses' | translate }}
-      </a>
-      <a mat-button routerLink="/overview" routerLinkActive="active">
-        {{ 'nav.overview' | translate }}
-      </a>
-    </nav>
-
-    <button mat-icon-button [matMenuTriggerFor]="mobileNav" class="header__hamburger">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #mobileNav="matMenu">
-      <a mat-menu-item routerLink="/courses">
-        <mat-icon>menu_book</mat-icon>
-        {{ 'nav.courses' | translate }}
-      </a>
-      <a mat-menu-item routerLink="/overview">
-        <mat-icon>dashboard</mat-icon>
-        {{ 'nav.overview' | translate }}
-      </a>
-    </mat-menu>
+    <nav class="header__nav"></nav>
   }
 
   <span class="header__spacer"></span>

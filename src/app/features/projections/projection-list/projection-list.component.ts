@@ -100,24 +100,41 @@ export class ProjectionListComponent implements OnInit {
     this.router.navigate(['/courses', this.courseId, 'projections', projection.id, 'edit']);
   }
 
+  isAutoProjection(projection: ProjectionDTO): boolean {
+    return projection.name === this.courseName();
+  }
+
   confirmDelete(projection: ProjectionDTO): void {
+    const isAuto = this.isAutoProjection(projection);
+
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: this.translate.instant('projections.delete_title'),
-        message: this.translate.instant('projections.delete_message', {
-          name: projection.name,
-        }),
+        title: this.translate.instant(isAuto ? 'overview.reset_title' : 'projections.delete_title'),
+        message: this.translate.instant(
+          isAuto ? 'overview.reset_message' : 'projections.delete_message',
+          { name: projection.name },
+        ),
       } as ConfirmDialogData,
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (!confirmed) return;
-      this.projectionsService.delete(this.courseId, projection.id).subscribe({
-        next: () => {
-          this.projections.update((list) => list.filter((p) => p.id !== projection.id));
-          this.notification.success(this.translate.instant('common.deleted'));
-        },
-      });
+
+      if (isAuto) {
+        this.projectionsService.reset(this.courseId, projection.id).subscribe({
+          next: (updated) => {
+            this.projections.update((list) => list.map((p) => (p.id === updated.id ? updated : p)));
+            this.notification.success(this.translate.instant('overview.reset_success'));
+          },
+        });
+      } else {
+        this.projectionsService.delete(this.courseId, projection.id).subscribe({
+          next: () => {
+            this.projections.update((list) => list.filter((p) => p.id !== projection.id));
+            this.notification.success(this.translate.instant('common.deleted'));
+          },
+        });
+      }
     });
   }
 }

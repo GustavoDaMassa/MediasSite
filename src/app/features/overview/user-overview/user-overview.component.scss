@@ -5,6 +5,9 @@
 }
 
 .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: var(--spacing-lg);
 
   h1 {
@@ -42,26 +45,13 @@
     }
   }
 
-  mat-card-header {
-    padding: var(--spacing-md) var(--spacing-md) 0 !important;
-  }
-
-  mat-card-content {
-    padding: var(--spacing-md) !important;
-  }
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    gap: var(--spacing-md);
-  }
-
   &__title {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: var(--spacing-xs);
+    flex: 1;
+    min-width: 0;
 
     h3 {
       margin: 0;
@@ -71,7 +61,7 @@
     }
   }
 
-  &__course-badge {
+  &__formula-badge {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
@@ -81,11 +71,17 @@
     font-size: var(--font-xs);
     font-weight: 600;
     color: var(--color-primary);
+    font-family: 'Courier New', monospace;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     mat-icon {
       font-size: 13px;
       width: 13px;
       height: 13px;
+      flex-shrink: 0;
     }
   }
 
@@ -107,12 +103,39 @@
     font-size: var(--font-xl);
     font-weight: 700;
   }
+
+  &__actions {
+    display: flex;
+    flex-shrink: 0;
+    align-self: center;
+  }
+}
+
+.card-body {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .assessments-grid {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
+  flex: 1;
 }
 
 .assessment-chip {
@@ -150,13 +173,16 @@
     padding: var(--spacing-md);
   }
 
-  .overview-card {
-    &__header {
-      flex-direction: column;
-    }
+  .page-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
 
-    &__grade {
-      align-items: flex-start;
-    }
+  .card-top {
+    flex-direction: column;
+  }
+
+  .overview-card__grade {
+    align-items: flex-start;
   }
 }

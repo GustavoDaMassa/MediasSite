@@ -31,4 +31,11 @@ export class ProjectionsService {
       `${this.base}/api/v1/${courseId}/projections/${projectionId}`,
     );
   }
+
+  reset(courseId: number, projectionId: number): Observable<ProjectionDTO> {
+    return this.http.patch<ProjectionDTO>(
+      `${this.base}/api/v1/${courseId}/projections/${projectionId}/reset`,
+      {},
+    );
+  }
 }

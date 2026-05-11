@@ -85,13 +85,16 @@
     "impossible_warning": "A nota de corte não pode mais ser atingida nesta projeção."
   },
   "overview": {
-    "title": "Visão Geral",
+    "title": "Disciplinas",
     "subtitle": "Todas as projeções de todas as disciplinas",
     "course": "Disciplina",
     "projection": "Projeção",
     "assessments": "Avaliações",
     "final_grade": "Nota Final",
-    "no_data": "Nenhuma projeção cadastrada."
+    "no_data": "Nenhuma projeção cadastrada.",
+    "reset_title": "Limpar projeção",
+    "reset_message": "Tem certeza que deseja limpar todas as notas da disciplina \"{{name}}\"?",
+    "reset_success": "Projeção limpa com sucesso!"
   },
   "validation": {
     "required": "Este campo é obrigatório.",

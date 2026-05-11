@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <div class="page-header__nav">
-      <a routerLink="/courses" class="breadcrumb-link">
+      <a routerLink="/overview" class="breadcrumb-link">
         <mat-icon>arrow_back</mat-icon>
         {{ 'nav.courses' | translate }}
       </a>
@@ -49,10 +49,10 @@
                 <button
                   mat-icon-button
                   color="warn"
-                  [matTooltip]="'common.delete' | translate"
+                  [matTooltip]="(isAutoProjection(projection) ? 'overview.reset_title' : 'common.delete') | translate"
                   (click)="confirmDelete(projection)"
                 >
-                  <mat-icon>delete</mat-icon>
+                  <mat-icon>{{ isAutoProjection(projection) ? 'restart_alt' : 'delete' }}</mat-icon>
                 </button>
               </div>
             </div>
