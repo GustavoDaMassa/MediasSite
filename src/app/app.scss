@@ -22,13 +22,13 @@
   border: none;
   border-radius: var(--radius-md);
   background-color: transparent;
-  color: var(--color-text-secondary);
+  color: var(--color-primary);
   transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
 
   &:hover {
     background-color: var(--color-surface-hover);
     box-shadow: var(--shadow-sm);
-    color: var(--color-text-primary);
+    color: var(--color-primary-hover);
   }
 
   &__img {
@@ -42,6 +42,30 @@
     width: 20px;
     height: 20px;
     line-height: 20px;
+  }
+}
+
+:host-context(html[data-theme='light']) .app-menu-btn--auth {
+  color: #ffffff;
+
+  .app-menu-btn__img { filter: brightness(0) invert(1); }
+
+  &:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.18);
+    box-shadow: none;
+  }
+}
+
+:host-context(html[data-theme='dark']) .app-menu-btn--auth {
+  color: #000000;
+
+  .app-menu-btn__img { filter: brightness(0); }
+
+  &:hover {
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.18);
+    box-shadow: none;
   }
 }
 
