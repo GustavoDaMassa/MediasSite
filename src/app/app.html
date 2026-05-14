@@ -3,8 +3,9 @@
     <app-sidenav (close)="sidenav.close()" />
   </mat-sidenav>
   <mat-sidenav-content>
-    <button mat-icon-button class="app-menu-btn" (click)="sidenav.toggle()">
-      <img src="assets/logo.png" alt="MediasAPI" class="app-menu-btn__img" />
+    <button class="app-menu-btn" (click)="sidenav.toggle()" aria-label="Abrir menu">
+      <img src="assets/logo.png" alt="" class="app-menu-btn__img" />
+      <mat-icon class="app-menu-btn__icon">menu</mat-icon>
     </button>
     <main>
       <router-outlet />

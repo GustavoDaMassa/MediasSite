@@ -3,8 +3,9 @@
   background: transparent !important;
 }
 
-// mat-sidenav-container cobre o degradê do body por padrão
-.mat-drawer-container {
+// mat-sidenav-container e mat-drawer-content cobrem o degradê do body por padrão
+.mat-drawer-container,
+.mat-drawer-content {
   background-color: transparent !important;
 }
 
@@ -14,18 +15,33 @@
   left: 12px;
   z-index: 99;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 8px;
+  border: none;
   border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--color-text-secondary);
   transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
 
   &:hover {
     background-color: var(--color-surface-hover);
     box-shadow: var(--shadow-sm);
+    color: var(--color-text-primary);
   }
 
   &__img {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
+  }
+
+  &__icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
   }
 }
 
