@@ -10,6 +10,6 @@ export const noAuthGuard: CanActivateFn = () => {
     return true;
   }
 
-  router.navigate(['/courses']);
+  router.navigate(['/overview']);
   return false;
 };

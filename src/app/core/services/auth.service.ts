@@ -31,7 +31,7 @@ export class AuthService {
         map((user): CurrentUser => ({ ...user, token: this.storage.getToken()! })),
         tap((current) => {
           this.persistUser(current);
-          this.router.navigate(['/courses']);
+          this.router.navigate(['/overview']);
         }),
       );
   }
