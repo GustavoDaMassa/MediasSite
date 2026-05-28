@@ -57,7 +57,7 @@ html[data-theme='dark'] {
 // CSS Custom Properties — design system acadêmico
 html[data-theme='light'] {
   --color-bg: #ffffff;
-  --color-bg-gradient-end: #0288d1;
+  --color-bg-app: #0288d1;
   --color-surface: #f6f8fa;
   --color-surface-hover: #eaeef2;
   --color-border: #d0d7de;
@@ -83,7 +83,7 @@ html[data-theme='light'] {
 
 html[data-theme='dark'] {
   --color-bg: #0d1117;
-  --color-bg-gradient-end: #004d63;
+  --color-bg-app: #004d63;
   --color-surface: #161b22;
   --color-surface-hover: #1c2128;
   --color-border: #30363d;
@@ -145,8 +145,7 @@ body {
 }
 
 body {
-  background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-bg-gradient-end) 100%);
-  background-attachment: fixed;
+  background-color: var(--color-bg-app);
   color: var(--color-text-primary);
   font-family:
     'Inter',

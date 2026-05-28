@@ -17,6 +17,18 @@
     color: var(--color-text-secondary);
     font-size: var(--font-sm);
 
+    :host-context(html[data-theme='light']) & {
+      color: rgba(255, 255, 255, 0.9);
+
+      span, .breadcrumb-link {
+        color: #ffffff;
+      }
+
+      .breadcrumb-separator {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
     span {
       color: var(--color-text-primary);
       font-weight: 600;
