@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
-import { CurrentUser, LoginRequest, RegisterRequest, Role, UserDTO } from '../../shared/models';
+import { ApiResponse, CurrentUser, LoginRequest, LoginResponse, RegisterRequest, Role, UserDTO } from '../../shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,14 +21,15 @@ export class AuthService {
 
   login(request: LoginRequest): Observable<CurrentUser> {
     return this.http
-      .post(`${environment.apiUrl}/authenticate`, request, { responseType: 'text' })
+      .post<LoginResponse>(`${environment.apiUrl}/authenticate`, request)
       .pipe(
-        switchMap((token) => {
-          this.storage.setToken(token);
+        switchMap((response) => {
+          this.storage.setToken(response.accessToken);
+          this.storage.setRefreshToken(response.refreshToken);
           this.storage.setEmail(request.email);
-          return this.http.get<UserDTO>(`${environment.apiUrl}/api/v1/users/${request.email}`);
+          return this.http.get<ApiResponse<UserDTO>>(`${environment.apiUrl}/api/v1/users/${request.email}`);
         }),
-        map((user): CurrentUser => ({ ...user, token: this.storage.getToken()! })),
+        map((wrapped): CurrentUser => ({ ...wrapped.data, token: this.storage.getToken()! })),
         tap((current) => {
           this.persistUser(current);
           this.router.navigate(['/overview']);
@@ -37,10 +38,18 @@ export class AuthService {
   }
 
   register(request: RegisterRequest): Observable<UserDTO> {
-    return this.http.post<UserDTO>(`${environment.apiUrl}/api/v1/users`, request);
+    return this.http
+      .post<ApiResponse<UserDTO>>(`${environment.apiUrl}/api/v1/users`, request)
+      .pipe(map((r) => r.data));
   }
 
   logout(): void {
+    const refreshToken = this.storage.getRefreshToken();
+    if (refreshToken) {
+      this.http
+        .post(`${environment.apiUrl}/authenticate/logout`, { refreshToken })
+        .subscribe({ error: () => {} });
+    }
     this.storage.clearAuth();
     this.currentUser.set(null);
     this.router.navigate(['/login']);

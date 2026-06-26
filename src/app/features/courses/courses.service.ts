@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { CourseDTO, CreateCourseRequest, ProjectionDTO } from '../../shared/models';
+import { ApiResponse, CourseDTO, CreateCourseRequest, PageResponse, ProjectionDTO } from '../../shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -10,32 +11,40 @@ export class CoursesService {
   private readonly base = environment.apiUrl;
 
   list(userId: number): Observable<CourseDTO[]> {
-    return this.http.get<CourseDTO[]>(`${this.base}/api/v1/${userId}/courses`);
+    return this.http
+      .get<PageResponse<CourseDTO>>(`${this.base}/api/v1/${userId}/courses`)
+      .pipe(map((r) => r.data));
   }
 
   create(userId: number, req: CreateCourseRequest, context?: HttpContext): Observable<CourseDTO> {
-    return this.http.post<CourseDTO>(`${this.base}/api/v1/${userId}/courses`, req, { context });
+    return this.http
+      .post<ApiResponse<CourseDTO>>(`${this.base}/api/v1/${userId}/courses`, req, { context })
+      .pipe(map((r) => r.data));
   }
 
   updateName(userId: number, courseId: number, name: string): Observable<CourseDTO> {
-    return this.http.patch<CourseDTO>(`${this.base}/api/v1/${userId}/courses/${courseId}/name`, {
-      string: name,
-    });
+    return this.http
+      .patch<ApiResponse<CourseDTO>>(`${this.base}/api/v1/${userId}/courses/${courseId}/name`, { string: name })
+      .pipe(map((r) => r.data));
   }
 
   updateMethod(userId: number, courseId: number, method: string, context?: HttpContext): Observable<CourseDTO> {
-    return this.http.patch<CourseDTO>(
-      `${this.base}/api/v1/${userId}/courses/${courseId}/method`,
-      { string: method },
-      { context },
-    );
+    return this.http
+      .patch<ApiResponse<CourseDTO>>(
+        `${this.base}/api/v1/${userId}/courses/${courseId}/method`,
+        { string: method },
+        { context },
+      )
+      .pipe(map((r) => r.data));
   }
 
   updateCutOff(userId: number, courseId: number, cutOff: number): Observable<CourseDTO> {
-    return this.http.patch<CourseDTO>(
-      `${this.base}/api/v1/${userId}/courses/${courseId}/cutoffgrade`,
-      { value: cutOff },
-    );
+    return this.http
+      .patch<ApiResponse<CourseDTO>>(
+        `${this.base}/api/v1/${userId}/courses/${courseId}/cutoffgrade`,
+        { value: cutOff },
+      )
+      .pipe(map((r) => r.data));
   }
 
   update(
@@ -54,10 +63,14 @@ export class CoursesService {
   }
 
   delete(userId: number, courseId: number): Observable<void> {
-    return this.http.delete<void>(`${this.base}/api/v1/${userId}/courses/${courseId}`);
+    return this.http
+      .delete<ApiResponse<CourseDTO>>(`${this.base}/api/v1/${userId}/courses/${courseId}`)
+      .pipe(map(() => undefined));
   }
 
   listAllProjections(userId: number): Observable<ProjectionDTO[]> {
-    return this.http.get<ProjectionDTO[]>(`${this.base}/api/v1/${userId}/courses/projections`);
+    return this.http
+      .get<PageResponse<ProjectionDTO>>(`${this.base}/api/v1/${userId}/courses/projections`)
+      .pipe(map((r) => r.data));
   }
 }

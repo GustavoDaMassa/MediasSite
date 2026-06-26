@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class StorageService {
   private readonly TOKEN_KEY = 'auth_token';
+  private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly USER_ID_KEY = 'user_id';
   private readonly EMAIL_KEY = 'user_email';
   private readonly NAME_KEY = 'user_name';
@@ -20,6 +21,14 @@ export class StorageService {
 
   hasToken(): boolean {
     return !!this.getToken();
+  }
+
+  setRefreshToken(token: string): void {
+    localStorage.setItem(this.REFRESH_TOKEN_KEY, token);
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
   }
 
   setUserId(id: number): void {
@@ -73,6 +82,7 @@ export class StorageService {
 
   clearAuth(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
     localStorage.removeItem(this.USER_ID_KEY);
     localStorage.removeItem(this.EMAIL_KEY);
     localStorage.removeItem(this.NAME_KEY);

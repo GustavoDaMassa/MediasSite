@@ -1,23 +1,32 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { StorageService } from '../services/storage.service';
+import { environment } from '../../../environments/environment';
 
-const PUBLIC_URLS = ['/authenticate', '/api/v1/users'];
+const JWT_EXEMPT_URLS = [
+  '/authenticate',
+  '/api/v1/users',
+  '/authenticate/refresh',
+  '/authenticate/logout',
+  '/api/v1/applications',
+];
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const storage = inject(StorageService);
   const token = storage.getToken();
 
-  const isPublic =
-    PUBLIC_URLS.some((url) => req.url.endsWith(url)) && req.method === 'POST';
+  const skipJwt =
+    JWT_EXEMPT_URLS.some((url) => req.url.includes(url)) && req.method === 'POST';
 
-  if (token && !isPublic) {
-    return next(
-      req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${token}`),
-      }),
-    );
+  let headers = req.headers;
+
+  if (environment.apiKey) {
+    headers = headers.set('X-Api-Key', environment.apiKey);
   }
 
-  return next(req);
+  if (token && !skipJwt) {
+    headers = headers.set('Authorization', `Bearer ${token}`);
+  }
+
+  return next(req.clone({ headers }));
 };
