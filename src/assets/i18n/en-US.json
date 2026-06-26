@@ -76,6 +76,7 @@
     "identifier": "Assessment",
     "grade": "Grade",
     "required_grade": "Required",
+    "required_grade_max_near": "If acing the next ones",
     "max_value": "Max",
     "insert_grade": "Enter Grade",
     "current_grade": "Current grade: {{grade}}",

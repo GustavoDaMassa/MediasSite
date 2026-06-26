@@ -4,6 +4,7 @@ export interface AssessmentDTO {
   grade: number;
   maxValue: number;
   requiredGrade: number;
+  requiredGradeMaxNear: number;
   fixed: boolean;
 }
 

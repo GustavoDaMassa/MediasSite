@@ -48,6 +48,16 @@
                 {{ assessment()!.requiredGrade | number: '1.1-2' }}
               </span>
             </div>
+            @if (assessment()!.requiredGradeMaxNear !== assessment()!.requiredGrade) {
+              <div class="assessment-info__item">
+                <span class="assessment-info__label">
+                  {{ 'assessments.required_grade_max_near' | translate }}
+                </span>
+                <span class="assessment-info__value grade-pending">
+                  {{ assessment()!.requiredGradeMaxNear | number: '1.1-2' }}
+                </span>
+              </div>
+            }
           }
         </div>
 

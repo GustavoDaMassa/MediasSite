@@ -76,6 +76,7 @@
     "identifier": "Avaliação",
     "grade": "Nota",
     "required_grade": "Necessária",
+    "required_grade_max_near": "Se acertar as próximas",
     "max_value": "Máximo",
     "insert_grade": "Lançar Nota",
     "current_grade": "Nota atual: {{grade}}",

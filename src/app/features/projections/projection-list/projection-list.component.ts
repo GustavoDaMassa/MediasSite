@@ -58,7 +58,7 @@ export class ProjectionListComponent implements OnInit {
   readonly loading = signal(true);
   courseId = 0;
 
-  readonly assessmentColumns = ['identifier', 'grade', 'requiredGrade', 'actions'];
+  readonly assessmentColumns = ['identifier', 'grade', 'requiredGrade', 'requiredGradeMaxNear', 'actions'];
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.params['courseId']);

@@ -104,6 +104,23 @@
                 </td>
               </ng-container>
 
+              <ng-container matColumnDef="requiredGradeMaxNear">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'assessments.required_grade_max_near' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let a">
+                  @if (!isGraded(a)) {
+                    @if (a.requiredGradeMaxNear === -1) {
+                      <span class="grade-impossible">{{ 'assessments.impossible' | translate }}</span>
+                    } @else {
+                      <span class="grade-pending">{{ a.requiredGradeMaxNear | number: '1.1-2' }}</span>
+                    }
+                  } @else {
+                    <span class="grade-empty">—</span>
+                  }
+                </td>
+              </ng-container>
+
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let a">
