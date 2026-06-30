@@ -27,7 +27,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           messageKey = 'errors.connection_error';
           break;
         case 401:
-          if (auth.isAuthenticated()) {
+          if (req.url.includes('/authenticate')) {
+            messageKey = 'errors.invalid_credentials';
+          } else if (auth.isAuthenticated()) {
             auth.logout();
             messageKey = 'errors.session_expired';
           }

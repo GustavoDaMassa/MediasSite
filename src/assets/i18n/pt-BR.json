@@ -106,6 +106,7 @@
   },
   "errors": {
     "session_expired": "Sessão expirada. Faça login novamente.",
+    "invalid_credentials": "Email ou senha incorretos.",
     "not_found": "Recurso não encontrado.",
     "no_permission": "Você não tem permissão para realizar esta ação.",
     "server_error": "Erro interno do servidor. Tente novamente.",
